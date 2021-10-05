@@ -1,0 +1,17 @@
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\bin\Debug\NWU_Pointsch_System.exe.config
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\bin\Debug\NWU_Pointsch_System.exe
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\bin\Debug\NWU_Pointsch_System.pdb
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\obj\Debug\NWU_Pointsch_System.csproj.AssemblyReference.cache
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\obj\Debug\NWU_Pointsch_System.frmLogin.resources
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\obj\Debug\NWU_Pointsch_System.Properties.Resources.resources
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\obj\Debug\NWU_Pointsch_System.csproj.GenerateResource.cache
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\obj\Debug\NWU_Pointsch_System.csproj.CoreCompileInputs.cache
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\obj\Debug\NWU_Pointsch_System.exe
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\obj\Debug\NWU_Pointsch_System.pdb
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\obj\Debug\NWU_Pointsch_System.frmProfile.resources
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\obj\Debug\NWU_Pointsch_System.frmReport.resources
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\obj\Debug\NWU_Pointsch_System.frmStadmin.resources
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\obj\Debug\NWU_Pointsch_System.frmDBEdit.resources
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\obj\Debug\NWU_Pointsch_System.frmPointschMachine.resources
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\bin\Debug\dbPointsch.mdf
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\NWU_Pointsch_System\NWU_Pointsch_System\bin\Debug\dbPointsch_log.ldf
