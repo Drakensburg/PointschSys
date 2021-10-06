@@ -14,7 +14,7 @@ namespace NWU_Pointsch_System
     public partial class frmLogin : Form
     {
         public string StudentNumber, StadminNumber = "";
-        string conStr = @"";
+        string conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\dbPointsch.mdf;Integrated Security=True";
         SqlConnection conn;   //all my public statements
         SqlCommand comm;
         SqlDataAdapter adap;
@@ -52,10 +52,16 @@ namespace NWU_Pointsch_System
             string tempStudentNum = txtUser.Text;
             string tempStadminNum = txtUser.Text;
 
-
-            conn = new SqlConnection(conStr);
-            conn.Open();
-            sql = "SELECT Student_NWU_ID FROM Student WHERE Student_NWU_ID = @num";
+            try
+            {
+                conn = new SqlConnection(conStr);
+                conn.Open();
+                sql = "SELECT Student_NWU_ID FROM Student WHERE Student_NWU_ID = @num";
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Database Unavailable");
+            }
 
             comm = new SqlCommand(sql, conn);
             comm.Parameters.AddWithValue("@num", tempStudentNum);
@@ -68,15 +74,15 @@ namespace NWU_Pointsch_System
                 {
                     StudentNumber = txtUser.Text;
                     frmProfile fProfile = new frmProfile();
+                    fProfile.ShowDialog();
                     break;
                 }
             }
             conn.Close();
 
-
             conn = new SqlConnection(conStr);
             conn.Open();
-            sql = "SELECT Staff_NWU_ID integer FROM Staff WHERE Staff_NWU_ID integer = @num";
+            sql = "SELECT Staff_NWU_ID FROM Staff WHERE Staff_NWU_ID = @num";
 
             comm = new SqlCommand(sql, conn);
             comm.Parameters.AddWithValue("@num", tempStadminNum);
@@ -89,6 +95,7 @@ namespace NWU_Pointsch_System
                 {
                     StadminNumber = txtUser.Text;
                     frmStadmin fStadmin = new frmStadmin();
+                    fStadmin.ShowDialog();
                     break;
                 }
                 else
@@ -96,8 +103,6 @@ namespace NWU_Pointsch_System
                     MessageBox.Show("Invalid Student/Staff number");
                 }
             }
-
-
         }
 
         //====DELETE
@@ -109,8 +114,8 @@ namespace NWU_Pointsch_System
 
         private void btnStaff_Click(object sender, EventArgs e)
         {
-            frmStadmin fProfile = new frmStadmin();
-            fProfile.ShowDialog();
+            frmStadmin fStadmin = new frmStadmin();
+            fStadmin.ShowDialog();
         }
         //====DELETE
     }
