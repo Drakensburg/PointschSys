@@ -36,7 +36,6 @@ namespace NWU_Pointsch_System
             this.gbPersonalInformation = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbPosition = new System.Windows.Forms.ComboBox();
-            this.cbAdmin = new System.Windows.Forms.CheckBox();
             this.lblID = new System.Windows.Forms.Label();
             this.lblSNo = new System.Windows.Forms.Label();
             this.lblSurname = new System.Windows.Forms.Label();
@@ -61,6 +60,8 @@ namespace NWU_Pointsch_System
             this.cbDI = new System.Windows.Forms.ComboBox();
             this.lblType = new System.Windows.Forms.Label();
             this.cbTpe = new System.Windows.Forms.ComboBox();
+            this.lblCampus = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPointsch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picbPurpleThing)).BeginInit();
             this.gbPersonalInformation.SuspendLayout();
@@ -99,9 +100,10 @@ namespace NWU_Pointsch_System
             // 
             // gbPersonalInformation
             // 
+            this.gbPersonalInformation.Controls.Add(this.lblCampus);
+            this.gbPersonalInformation.Controls.Add(this.comboBox1);
             this.gbPersonalInformation.Controls.Add(this.label1);
             this.gbPersonalInformation.Controls.Add(this.cbPosition);
-            this.gbPersonalInformation.Controls.Add(this.cbAdmin);
             this.gbPersonalInformation.Controls.Add(this.lblID);
             this.gbPersonalInformation.Controls.Add(this.lblSNo);
             this.gbPersonalInformation.Controls.Add(this.lblSurname);
@@ -132,23 +134,14 @@ namespace NWU_Pointsch_System
             // 
             this.cbPosition.FormattingEnabled = true;
             this.cbPosition.Items.AddRange(new object[] {
-            "STUDENT",
-            "STAFF"});
+            "Student",
+            "Admin",
+            "Staff"});
             this.cbPosition.Location = new System.Drawing.Point(444, 137);
             this.cbPosition.Name = "cbPosition";
             this.cbPosition.Size = new System.Drawing.Size(237, 33);
             this.cbPosition.TabIndex = 24;
-            this.cbPosition.Text = "SELECT POSITION";
-            // 
-            // cbAdmin
-            // 
-            this.cbAdmin.AutoSize = true;
-            this.cbAdmin.Location = new System.Drawing.Point(11, 139);
-            this.cbAdmin.Name = "cbAdmin";
-            this.cbAdmin.Size = new System.Drawing.Size(111, 29);
-            this.cbAdmin.TabIndex = 23;
-            this.cbAdmin.Text = "ADMIN";
-            this.cbAdmin.UseVisualStyleBackColor = true;
+            this.cbPosition.Text = "SELECT";
             // 
             // lblID
             // 
@@ -162,7 +155,7 @@ namespace NWU_Pointsch_System
             // lblSNo
             // 
             this.lblSNo.AutoSize = true;
-            this.lblSNo.Location = new System.Drawing.Point(22, 85);
+            this.lblSNo.Location = new System.Drawing.Point(46, 85);
             this.lblSNo.Name = "lblSNo";
             this.lblSNo.Size = new System.Drawing.Size(63, 25);
             this.lblSNo.TabIndex = 21;
@@ -180,7 +173,7 @@ namespace NWU_Pointsch_System
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(6, 33);
+            this.lblName.Location = new System.Drawing.Point(30, 38);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(79, 25);
             this.lblName.TabIndex = 19;
@@ -195,9 +188,9 @@ namespace NWU_Pointsch_System
             // 
             // txtSNO
             // 
-            this.txtSNO.Location = new System.Drawing.Point(91, 82);
+            this.txtSNO.Location = new System.Drawing.Point(115, 82);
             this.txtSNO.Name = "txtSNO";
-            this.txtSNO.Size = new System.Drawing.Size(222, 31);
+            this.txtSNO.Size = new System.Drawing.Size(198, 31);
             this.txtSNO.TabIndex = 17;
             // 
             // txtSurname
@@ -209,9 +202,9 @@ namespace NWU_Pointsch_System
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(91, 30);
+            this.txtName.Location = new System.Drawing.Point(115, 30);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(222, 31);
+            this.txtName.Size = new System.Drawing.Size(198, 31);
             this.txtName.TabIndex = 15;
             // 
             // button1
@@ -372,6 +365,28 @@ namespace NWU_Pointsch_System
             this.cbTpe.TabIndex = 0;
             this.cbTpe.Text = "SELECT A TYPE";
             // 
+            // lblCampus
+            // 
+            this.lblCampus.AutoSize = true;
+            this.lblCampus.Location = new System.Drawing.Point(1, 143);
+            this.lblCampus.Name = "lblCampus";
+            this.lblCampus.Size = new System.Drawing.Size(108, 25);
+            this.lblCampus.TabIndex = 27;
+            this.lblCampus.Text = "CAMPUS:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Potchefstroom",
+            "Mafikeng",
+            "Vaal"});
+            this.comboBox1.Location = new System.Drawing.Point(115, 140);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(198, 33);
+            this.comboBox1.TabIndex = 26;
+            this.comboBox1.Text = "SELECT";
+            // 
             // frmDBEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -428,6 +443,7 @@ namespace NWU_Pointsch_System
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbPosition;
-        private System.Windows.Forms.CheckBox cbAdmin;
+        private System.Windows.Forms.Label lblCampus;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

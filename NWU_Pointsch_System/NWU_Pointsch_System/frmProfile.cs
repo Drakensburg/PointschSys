@@ -18,7 +18,7 @@ namespace NWU_Pointsch_System
             InitializeComponent();
         }
 
-        string conStr = @"";
+        string conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\dbPointsch.mdf;Integrated Security=True";
         SqlConnection conn;   //all my public statements
         SqlCommand comm;
         SqlDataAdapter adap;
