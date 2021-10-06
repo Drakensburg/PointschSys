@@ -50,6 +50,8 @@ namespace NWU_Pointsch_System
             this.gbDetail = new System.Windows.Forms.GroupBox();
             this.btnLogout = new System.Windows.Forms.Button();
             this.picbPurpleThing = new System.Windows.Forms.PictureBox();
+            this.lblSno = new System.Windows.Forms.Label();
+            this.lblSnoPhys = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picbSoSA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picbStatus)).BeginInit();
             this.gbInfo.SuspendLayout();
@@ -106,7 +108,7 @@ namespace NWU_Pointsch_System
             this.lblSum.AutoSize = true;
             this.lblSum.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSum.ForeColor = System.Drawing.Color.Purple;
-            this.lblSum.Location = new System.Drawing.Point(340, 98);
+            this.lblSum.Location = new System.Drawing.Point(340, 63);
             this.lblSum.Name = "lblSum";
             this.lblSum.Size = new System.Drawing.Size(114, 61);
             this.lblSum.TabIndex = 5;
@@ -114,6 +116,8 @@ namespace NWU_Pointsch_System
             // 
             // gbInfo
             // 
+            this.gbInfo.Controls.Add(this.lblSnoPhys);
+            this.gbInfo.Controls.Add(this.lblSno);
             this.gbInfo.Controls.Add(this.picbLogo);
             this.gbInfo.Controls.Add(this.gbPS);
             this.gbInfo.Controls.Add(this.picbSoSA);
@@ -146,9 +150,9 @@ namespace NWU_Pointsch_System
             this.gbPS.Controls.Add(this.lblPos);
             this.gbPS.Controls.Add(this.lblNeg);
             this.gbPS.Controls.Add(this.lblSum);
-            this.gbPS.Location = new System.Drawing.Point(463, 118);
+            this.gbPS.Location = new System.Drawing.Point(463, 168);
             this.gbPS.Name = "gbPS";
-            this.gbPS.Size = new System.Drawing.Size(460, 171);
+            this.gbPS.Size = new System.Drawing.Size(460, 121);
             this.gbPS.TabIndex = 7;
             this.gbPS.TabStop = false;
             this.gbPS.Text = "POINTSCHS:SCORE";
@@ -156,7 +160,7 @@ namespace NWU_Pointsch_System
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(356, 62);
+            this.lblTotal.Location = new System.Drawing.Point(356, 27);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(86, 25);
             this.lblTotal.TabIndex = 10;
@@ -165,7 +169,7 @@ namespace NWU_Pointsch_System
             // lblInfraction
             // 
             this.lblInfraction.AutoSize = true;
-            this.lblInfraction.Location = new System.Drawing.Point(169, 62);
+            this.lblInfraction.Location = new System.Drawing.Point(169, 27);
             this.lblInfraction.Name = "lblInfraction";
             this.lblInfraction.Size = new System.Drawing.Size(158, 25);
             this.lblInfraction.TabIndex = 9;
@@ -174,7 +178,7 @@ namespace NWU_Pointsch_System
             // lblDiscipline
             // 
             this.lblDiscipline.AutoSize = true;
-            this.lblDiscipline.Location = new System.Drawing.Point(6, 62);
+            this.lblDiscipline.Location = new System.Drawing.Point(6, 27);
             this.lblDiscipline.Name = "lblDiscipline";
             this.lblDiscipline.Size = new System.Drawing.Size(146, 25);
             this.lblDiscipline.TabIndex = 8;
@@ -184,7 +188,7 @@ namespace NWU_Pointsch_System
             // 
             this.lblPos.AutoSize = true;
             this.lblPos.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPos.Location = new System.Drawing.Point(23, 98);
+            this.lblPos.Location = new System.Drawing.Point(23, 63);
             this.lblPos.Name = "lblPos";
             this.lblPos.Size = new System.Drawing.Size(114, 61);
             this.lblPos.TabIndex = 7;
@@ -194,7 +198,7 @@ namespace NWU_Pointsch_System
             // 
             this.lblNeg.AutoSize = true;
             this.lblNeg.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNeg.Location = new System.Drawing.Point(189, 98);
+            this.lblNeg.Location = new System.Drawing.Point(189, 63);
             this.lblNeg.Name = "lblNeg";
             this.lblNeg.Size = new System.Drawing.Size(114, 61);
             this.lblNeg.TabIndex = 6;
@@ -269,6 +273,26 @@ namespace NWU_Pointsch_System
             this.picbPurpleThing.TabIndex = 11;
             this.picbPurpleThing.TabStop = false;
             // 
+            // lblSno
+            // 
+            this.lblSno.AutoSize = true;
+            this.lblSno.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSno.Location = new System.Drawing.Point(457, 118);
+            this.lblSno.Name = "lblSno";
+            this.lblSno.Size = new System.Drawing.Size(86, 33);
+            this.lblSno.TabIndex = 10;
+            this.lblSno.Text = "SNO:";
+            // 
+            // lblSnoPhys
+            // 
+            this.lblSnoPhys.AutoSize = true;
+            this.lblSnoPhys.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSnoPhys.Location = new System.Drawing.Point(539, 118);
+            this.lblSnoPhys.Name = "lblSnoPhys";
+            this.lblSnoPhys.Size = new System.Drawing.Size(94, 33);
+            this.lblSnoPhys.TabIndex = 11;
+            this.lblSnoPhys.Text = "[SNO]";
+            // 
             // frmProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -300,8 +324,6 @@ namespace NWU_Pointsch_System
         #endregion
 
         private System.Windows.Forms.PictureBox picbSoSA;
-        private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Label lblSurname;
         private System.Windows.Forms.PictureBox picbStatus;
         private System.Windows.Forms.Label lblSum;
         private System.Windows.Forms.GroupBox gbInfo;
@@ -316,8 +338,12 @@ namespace NWU_Pointsch_System
         private System.Windows.Forms.GroupBox gbDiscipline;
         private System.Windows.Forms.ListBox lbDiscipline;
         private System.Windows.Forms.GroupBox gbDetail;
-        private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.PictureBox picbPurpleThing;
         private System.Windows.Forms.PictureBox picbLogo;
+        public System.Windows.Forms.Label lblName;
+        public System.Windows.Forms.Label lblSurname;
+        private System.Windows.Forms.Button btnLogout;
+        public System.Windows.Forms.Label lblSnoPhys;
+        public System.Windows.Forms.Label lblSno;
     }
 }

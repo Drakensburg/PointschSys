@@ -21,6 +21,9 @@ namespace NWU_Pointsch_System
         SqlDataReader reader;
         string sql = "";
 
+        public string sName = "";
+        public string sSurname = "";
+
         public frmLogin()
         {
             InitializeComponent();
@@ -35,6 +38,9 @@ namespace NWU_Pointsch_System
         {
             StudentNumber = "";
             StadminNumber = "";
+
+            sName = "";
+            sSurname = "";
 
             txtUser.Text = "";
             txtIDNumber.Text = "";
@@ -67,7 +73,7 @@ namespace NWU_Pointsch_System
                 {
                     conn = new SqlConnection(conStr);
                     conn.Open();
-                    sql = "SELECT Student_NWU_ID FROM Student WHERE Student_NWU_ID = @num1";
+                    sql = "SELECT * FROM Student WHERE Student_NWU_ID = @num1";
                 }
                 catch (Exception)
                 {
@@ -95,7 +101,7 @@ namespace NWU_Pointsch_System
                 {
                     conn = new SqlConnection(conStr);
                     conn.Open();
-                    sql = "SELECT Staff_NWU_ID FROM Staff WHERE Staff_NWU_ID = @num1";
+                    sql = "SELECT * FROM Staff WHERE Staff_NWU_ID = @num1";
                 }
                 catch (Exception)
                 {
@@ -109,7 +115,7 @@ namespace NWU_Pointsch_System
                 while (reader.Read())
                 {
                     string temp = reader.GetString(0);
-                    if (tempStudentNum == temp)
+                    if (tempStadminNum == temp)
                     {
                         bExist = true;
                         conn.Close();
@@ -124,7 +130,7 @@ namespace NWU_Pointsch_System
                     {
                         conn = new SqlConnection(conStr);
                         conn.Open();
-                        sql = "SELECT Student_NWU_ID FROM Student WHERE Student_NWU_ID = @num1 AND Student_ID = @num2";
+                        sql = "SELECT * FROM Student WHERE Student_NWU_ID = @num1 AND Student_ID = @num2";
                     }
                     catch (Exception)
                     {
@@ -139,10 +145,15 @@ namespace NWU_Pointsch_System
                     while (reader.Read())
                     {
                         string temp = reader.GetString(0);
+                        sName = reader.GetString(2);
+                        sSurname = reader.GetString(3);
                         if (tempStudentNum == temp)
                         {
                             StudentNumber = txtUser.Text;
                             frmProfile fProfile = new frmProfile();
+                            fProfile.lblName.Text = "NAME: " + sName.ToUpper();
+                            fProfile.lblSurname.Text = "SURNAME: " + sSurname.ToUpper();
+                            fProfile.lblSnoPhys.Text = StudentNumber;
                             fProfile.ShowDialog();
                             conn.Close();
                             bMis = false;
@@ -157,7 +168,7 @@ namespace NWU_Pointsch_System
                     {
                         conn = new SqlConnection(conStr);
                         conn.Open();
-                        sql = "SELECT Staff_NWU_ID FROM Staff WHERE Staff_NWU_ID = @num1 AND Staff_ID = @num2";
+                        sql = "SELECT * FROM Staff WHERE Staff_NWU_ID = @num1 AND Staff_ID = @num2";
                     }
                     catch (Exception)
                     {
@@ -172,10 +183,27 @@ namespace NWU_Pointsch_System
                     while (reader.Read())
                     {
                         string temp = reader.GetString(0);
+<<<<<<< Updated upstream
+=======
+                        sName = reader.GetString(2);
+                        sSurname = reader.GetString(3);
+
+>>>>>>> Stashed changes
                         if (tempStadminNum == temp)
                         {
                             StadminNumber = txtUser.Text;
                             frmStadmin fStadmin = new frmStadmin();
+                            fStadmin.lblName.Text = "NAME: " + sName.ToUpper();
+                            fStadmin.lblSurname.Text = "SURNAME: " + sSurname.ToUpper();
+                            fStadmin.lblSnoPhys.Text = StadminNumber;
+                            if (reader.GetBoolean(4) == true)
+                            {
+                                fStadmin.btnEditDB.Visible = true;
+                            }
+                            else
+                            {
+                                fStadmin.btnEditDB.Visible = false;
+                            }
                             fStadmin.ShowDialog();
                             conn.Close();
                             bMis = false;

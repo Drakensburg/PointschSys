@@ -30,6 +30,8 @@ namespace NWU_Pointsch_System
         {
             frmLogin loginForm = new frmLogin();
 
+
+
             string sNum = loginForm.StudentNumber;
             sql = "SELECT SUM(dt.Discipline_Pointsch) As Points, s.Student_ID, s.Student_Name " +
                 "FROM Student s LEFT JOIN Discipline d on d.Student_NWU_ID = s.Student_ID LEFT JOIN Discipline_Type dt on dt.Discipline_Type_Code = d.Discipline_Type_Code " +

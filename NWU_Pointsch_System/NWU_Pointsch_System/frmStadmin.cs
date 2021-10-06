@@ -7,29 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace NWU_Pointsch_System
 {
     public partial class frmStadmin : Form
     {
-        public bool bIsAdmin = true;
-
         public frmStadmin()
         {
             InitializeComponent();
         }
 
-        private void frmStadmin_Load(object sender, EventArgs e)
-        {
-            if (bIsAdmin)
-            {
-                btnEditDB.Visible = true;
-            }
-            else
-            {
-                btnEditDB.Visible = false;
-            }
-        }
+        string conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\dbPointsch.mdf;Integrated Security=True";
+        SqlConnection conn;   //all my public statements
+        SqlCommand comm;
+        SqlDataAdapter adap;
+        DataSet ds;
+        SqlDataReader reader;
+        string sql = "";
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
@@ -54,7 +49,6 @@ namespace NWU_Pointsch_System
         {
             frmPointschMachine fPM = new frmPointschMachine();
             fPM.ShowDialog();
-            fPM.sActionType = "AD";
         }
 
         private void btnAddInfraction_Click(object sender, EventArgs e)
