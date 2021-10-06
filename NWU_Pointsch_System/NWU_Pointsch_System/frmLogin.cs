@@ -183,24 +183,8 @@ namespace NWU_Pointsch_System
                     while (reader.Read())
                     {
                         string temp = reader.GetString(0);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
                         sName = reader.GetString(2);
                         sSurname = reader.GetString(3);
-
->>>>>>> Stashed changes
-=======
-                        sName = reader.GetString(2);
-                        sSurname = reader.GetString(3);
-
->>>>>>> Stashed changes
-=======
-                        sName = reader.GetString(2);
-                        sSurname = reader.GetString(3);
-
->>>>>>> Stashed changes
                         if (tempStadminNum == temp)
                         {
                             StadminNumber = txtUser.Text;
