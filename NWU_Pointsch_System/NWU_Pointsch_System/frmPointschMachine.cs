@@ -16,11 +16,11 @@ namespace NWU_Pointsch_System
         public string sActionType = "";
         string conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\dbPointsch.mdf;Integrated Security=True";
         SqlConnection conn;   //all my public statements
-        SqlCommand comm;
+        SqlCommand comm,comm2;
         SqlDataAdapter adap;
         DataSet ds;
         SqlDataReader reader;
-        string sql = "";
+        string sql, sql2 = "";
 
         public frmPointschMachine()
         {
@@ -42,13 +42,54 @@ namespace NWU_Pointsch_System
 
         private void btnFinalize_Click(object sender, EventArgs e)
         {
+            if (sActionType == "AD")
+            {
+                sql = "INSERT INTO Discipline(Discipline_Date, Discipline_Discription, Discipline_Pointsch) VALUES (@Date, @Discription, @Pointsch) WHERE (Student_NWU_ID = @StudentNumber)";  // Isert new record ///////////////////////ek dink die sal werk maar maak net seker asb emile want dis oor versilende tables
+                sql2 = "INSERT INTO Discipline_type(Discipline_type) VALUES (@Type) WHERE (Student_NWU_ID = @StudentNumber)";
 
-       
+                conn = new SqlConnection(conStr);
+                comm.Parameters.AddWithValue("@StudentNumber", txtStudentNum.Text);
+                comm.Parameters.AddWithValue("@Type", cmbActionType.SelectedItem);
+                comm.Parameters.AddWithValue("@Date", DateTime.Now);
+                comm.Parameters.AddWithValue("@Discription", rtbDiscription.Text);
+                comm.Parameters.AddWithValue("@Pointsch", txtPointschValue.Text);
+                conn.Open();
+                comm = new SqlCommand(sql, conn);
+                adap.InsertCommand = comm;
+                adap.InsertCommand.ExecuteNonQuery();
+                comm2 = new SqlCommand(sql2, conn);
+                adap.InsertCommand = comm2;
+                adap.InsertCommand.ExecuteNonQuery();
+
+                conn.Close();
+            }
+
+            if (sActionType == "AI")
+            {
+                sql = "INSERT INTO Infraction(Infraction_Date, Infraction_Discription, Infraction_Pointsch) VALUES (@Date, @Discription, @Pointsch) WHERE (Student_NWU_ID = @StudentNumber)";  // Isert new record ///////////////////////ek dink die sal werk maar maak net seker asb emile want dis oor versilende tables
+                sql2 = "INSERT INTO Infraction(Infraction_type) VALUES (@Type) WHERE (Student_NWU_ID = @StudentNumber)";
+
+                conn = new SqlConnection(conStr);
+                comm.Parameters.AddWithValue("@StudentNumber", txtStudentNum.Text);
+                comm.Parameters.AddWithValue("@Type", cmbActionType.SelectedItem);
+                comm.Parameters.AddWithValue("@Date", DateTime.Now);
+                comm.Parameters.AddWithValue("@Discription", rtbDiscription.Text);
+                comm.Parameters.AddWithValue("@Pointsch", txtPointschValue.Text);
+                conn.Open();
+                comm = new SqlCommand(sql, conn);
+                adap.InsertCommand = comm;
+                adap.InsertCommand.ExecuteNonQuery();
+                comm2 = new SqlCommand(sql2, conn);
+                adap.InsertCommand = comm2;
+                adap.InsertCommand.ExecuteNonQuery();
+
+                conn.Close();
+            }
         }
 
         private void btnGetStudent_Click(object sender, EventArgs e)
         {
-            sql = "SELECT Student_Name, Student_Surname FROM Student WHERE (Student_NWU_ID = @StudentNumber)"; //display all
+            sql = "SELECT Student_Name, Student_Surname FROM Student WHERE (Student_NWU_ID = @StudentNumber)"; 
 
             conn = new SqlConnection(conStr);
             comm = new SqlCommand(sql);
