@@ -47,6 +47,12 @@ namespace NWU_Pointsch_System
             //====DELETE
         }
 
+        private void checkDetails()
+        {
+            //====Toets x
+        }
+
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string tempStudentNum = txtUser.Text;
