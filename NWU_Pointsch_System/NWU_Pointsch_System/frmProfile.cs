@@ -69,10 +69,28 @@ namespace NWU_Pointsch_System
             if (SUM1 > SUM2)//Total
             {
                 lblTotal.Text = (SUM1 - SUM2).ToString();
+                lblTotal.ForeColor = Color.Purple;
+                if((SUM1 - SUM2) > 20)
+                {
+                    picbStatus.Image = Image.FromFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + @"\Good.png");
+                }
+                else
+                {
+                    picbStatus.Image = Image.FromFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + @"\Neutral.png");
+                }
             }
             else
             {
                 lblTotal.Text = (SUM2 - SUM1).ToString();
+                lblTotal.ForeColor = Color.DarkRed;
+                if ((SUM2 - SUM1) > 20)
+                {
+                    picbStatus.Image = Image.FromFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + @"\Bad.png");
+                }
+                else
+                {
+                    picbStatus.Image = Image.FromFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + @"\Neutral.png");
+                }
             }
 
 
