@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace NWU_Pointsch_System
 {
@@ -15,18 +16,10 @@ namespace NWU_Pointsch_System
     {
         public string StudentNumber, StadminNumber = "";
         string conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\dbPointsch.mdf;Integrated Security=True";
-        SqlConnection conn;   //all my public statements
+        SqlConnection conn;   
         SqlCommand comm;
-        SqlDataAdapter adap;
-        DataSet ds;
         SqlDataReader reader;
         string sql = "";
-
-        //hello die is n toets
-
-        //====DELETE
-        private bool bDev = true;
-        //====DELETE
 
         public frmLogin()
         {
@@ -38,93 +31,176 @@ namespace NWU_Pointsch_System
             Application.Exit();
         }
 
-        private void frmLogin_Load(object sender, EventArgs e)
+        private void clearCredentials()
         {
-            //====DELETE
-            if (bDev == true)
-            {
-                btnStaff.Visible = true;
-                btnStud.Visible = true;
-            }
-            //====DELETE
-        }
+            StudentNumber = "";
+            StadminNumber = "";
 
-        private void checkDetails()
-        {
-            //====Toets x
+            txtUser.Text = "";
+            txtIDNumber.Text = "";
         }
-
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string tempStudentNum = txtUser.Text;
             string tempStadminNum = txtUser.Text;
+            string tempID =     txtIDNumber.Text;
 
-            try
+            bool bMis   = true;
+            bool bExist = false;
+
+            if (tempStudentNum.Length != 8 || tempStadminNum.Length != 8)   //Test Credential Validity START
             {
-                conn = new SqlConnection(conStr);
-                conn.Open();
-                sql = "SELECT Student_NWU_ID FROM Student WHERE Student_NWU_ID = @num";
+                MessageBox.Show("SNO must be exactly 8 digits long");
             }
-            catch(Exception)
+            else if (tempID.Length != 13)
             {
-                MessageBox.Show("Database Unavailable");
+                MessageBox.Show("ID must be exactly 13 digits long");
             }
-
-            comm = new SqlCommand(sql, conn);
-            comm.Parameters.AddWithValue("@num", tempStudentNum);
-            reader = comm.ExecuteReader();
-
-            while (reader.Read())
+            else if (Regex.Matches(tempID, @"[a-zA-Z]").Count > 0|| Regex.Matches(tempStadminNum, @"[a-zA-Z]").Count > 0 || Regex.Matches(tempStudentNum, @"[a-zA-Z]").Count > 0)
             {
-                string temp = reader.GetString(0);
-                if (tempStudentNum == temp)   //Testing whether the user entered matches any data in the database
+                MessageBox.Show("ID or SNO must not contain letters!");
+            }                                                               //Test Credential Validity END
+            else                                                            //Check if in DB START
+            {
+                try
                 {
-                    StudentNumber = txtUser.Text;
-                    frmProfile fProfile = new frmProfile();
-                    fProfile.ShowDialog();
-                    break;
+                    conn = new SqlConnection(conStr);
+                    conn.Open();
+                    sql = "SELECT Student_NWU_ID FROM Student WHERE Student_NWU_ID = @num1";
                 }
-            }
-            conn.Close();
-
-            conn = new SqlConnection(conStr);
-            conn.Open();
-            sql = "SELECT Staff_NWU_ID FROM Staff WHERE Staff_NWU_ID = @num";
-
-            comm = new SqlCommand(sql, conn);
-            comm.Parameters.AddWithValue("@num", tempStadminNum);
-            reader = comm.ExecuteReader();
-
-            while (reader.Read())
-            {
-                string temp = reader.GetString(0);
-                if (tempStudentNum == temp)   //Testing whether the user entered matches any data in the database
+                catch (Exception)
                 {
-                    StadminNumber = txtUser.Text;
-                    frmStadmin fStadmin = new frmStadmin();
-                    fStadmin.ShowDialog();
-                    break;
+                    MessageBox.Show("Database Unavailable");
                 }
-                else
+
+                comm = new SqlCommand(sql, conn);
+                comm.Parameters.AddWithValue("@num1", tempStudentNum);
+                reader = comm.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    MessageBox.Show("Invalid Student/Staff number");
+                    string temp = reader.GetString(0);
+                    if (tempStudentNum == temp)
+                    {
+                        bExist = true;
+                        conn.Close();
+                        break;
+                    }
                 }
-            }
-        }
+                conn.Close();
 
-        //====DELETE
-        private void btnStud_Click(object sender, EventArgs e)
-        {
-            frmProfile fProfile = new frmProfile();
-            fProfile.ShowDialog();
-        }
 
-        private void btnStaff_Click(object sender, EventArgs e)
-        {
-            frmStadmin fStadmin = new frmStadmin();
-            fStadmin.ShowDialog();
+                try
+                {
+                    conn = new SqlConnection(conStr);
+                    conn.Open();
+                    sql = "SELECT Staff_NWU_ID FROM Staff WHERE Staff_NWU_ID = @num1";
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Database Unavailable");
+                }
+
+                comm = new SqlCommand(sql, conn);
+                comm.Parameters.AddWithValue("@num1", tempStadminNum);
+                reader = comm.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string temp = reader.GetString(0);
+                    if (tempStudentNum == temp)
+                    {
+                        bExist = true;
+                        conn.Close();
+                        break;
+                    }
+                }
+                conn.Close();
+
+                if(bExist == true)
+                {
+                    try
+                    {
+                        conn = new SqlConnection(conStr);
+                        conn.Open();
+                        sql = "SELECT Student_NWU_ID FROM Student WHERE Student_NWU_ID = @num1 AND Student_ID = @num2";
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Database Unavailable");
+                    }
+
+                    comm = new SqlCommand(sql, conn);
+                    comm.Parameters.AddWithValue("@num1", tempStudentNum);
+                    comm.Parameters.AddWithValue("@num2", tempID);
+                    reader = comm.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        string temp = reader.GetString(0);
+                        if (tempStudentNum == temp)
+                        {
+                            StudentNumber = txtUser.Text;
+                            frmProfile fProfile = new frmProfile();
+                            fProfile.ShowDialog();
+                            conn.Close();
+                            bMis = false;
+                            clearCredentials();
+                            break;
+                        }
+                    }
+                    conn.Close();
+
+
+                    try
+                    {
+                        conn = new SqlConnection(conStr);
+                        conn.Open();
+                        sql = "SELECT Staff_NWU_ID FROM Staff WHERE Staff_NWU_ID = @num1 AND Staff_ID = @num2";
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Database Unavailable");
+                    }
+
+                    comm = new SqlCommand(sql, conn);
+                    comm.Parameters.AddWithValue("@num1", tempStadminNum);
+                    comm.Parameters.AddWithValue("@num2", tempID);
+                    reader = comm.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        string temp = reader.GetString(0);
+                        if (tempStudentNum == temp)
+                        {
+                            StadminNumber = txtUser.Text;
+                            frmStadmin fStadmin = new frmStadmin();
+                            fStadmin.ShowDialog();
+                            conn.Close();
+                            bMis = false;
+                            clearCredentials();
+                            break;
+                        }
+                    }
+                    conn.Close();
+                }
+                else 
+                {
+                    MessageBox.Show("Person does not exist within database!");                
+                }
+
+                if (bMis == true)
+                {
+                    MessageBox.Show("SNO/ID Mismatch!");
+                }
+
+                bMis = true;
+                bExist = false;
+                tempStudentNum = "";
+                tempStadminNum = "";
+                tempID = "";
+            }                                                             //Check if in DB END 
         }
-        //====DELETE
     }
 }

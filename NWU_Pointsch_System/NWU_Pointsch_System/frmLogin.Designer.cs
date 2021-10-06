@@ -41,8 +41,6 @@ namespace NWU_Pointsch_System
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.btnStud = new System.Windows.Forms.Button();
-            this.btnStaff = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picbNWUPointschLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picbPurpleThing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -154,36 +152,12 @@ namespace NWU_Pointsch_System
             this.pictureBox3.TabIndex = 11;
             this.pictureBox3.TabStop = false;
             // 
-            // btnStud
-            // 
-            this.btnStud.Location = new System.Drawing.Point(400, 957);
-            this.btnStud.Name = "btnStud";
-            this.btnStud.Size = new System.Drawing.Size(153, 40);
-            this.btnStud.TabIndex = 12;
-            this.btnStud.Text = "STUD SKIP";
-            this.btnStud.UseVisualStyleBackColor = true;
-            this.btnStud.Visible = false;
-            this.btnStud.Click += new System.EventHandler(this.btnStud_Click);
-            // 
-            // btnStaff
-            // 
-            this.btnStaff.Location = new System.Drawing.Point(559, 957);
-            this.btnStaff.Name = "btnStaff";
-            this.btnStaff.Size = new System.Drawing.Size(153, 40);
-            this.btnStaff.TabIndex = 13;
-            this.btnStaff.Text = "STAFF SKIP";
-            this.btnStaff.UseVisualStyleBackColor = true;
-            this.btnStaff.Visible = false;
-            this.btnStaff.Click += new System.EventHandler(this.btnStaff_Click);
-            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1436, 1009);
-            this.Controls.Add(this.btnStaff);
-            this.Controls.Add(this.btnStud);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
@@ -200,7 +174,6 @@ namespace NWU_Pointsch_System
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "User Login";
-            this.Load += new System.EventHandler(this.frmLogin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picbNWUPointschLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picbPurpleThing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -224,8 +197,6 @@ namespace NWU_Pointsch_System
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Button btnStud;
-        private System.Windows.Forms.Button btnStaff;
     }
 }
 
