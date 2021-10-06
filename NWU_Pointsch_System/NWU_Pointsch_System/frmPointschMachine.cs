@@ -7,12 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace NWU_Pointsch_System
 {
     public partial class frmPointschMachine : Form
     {
         public string sActionType = "";
+        string conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\dbPointsch.mdf;Integrated Security=True";
+        SqlConnection conn;   //all my public statements
+        SqlCommand comm;
+        SqlDataAdapter adap;
+        DataSet ds;
+        SqlDataReader reader;
+        string sql = "";
 
         public frmPointschMachine()
         {
@@ -34,13 +42,141 @@ namespace NWU_Pointsch_System
 
         private void btnFinalize_Click(object sender, EventArgs e)
         {
-            if (cbDeclare.Checked)
+
+       
+        }
+
+        private void btnGetStudent_Click(object sender, EventArgs e)
+        {
+            sql = "SELECT Student_Name, Student_Surname FROM Student WHERE (Student_NWU_ID = @StudentNumber)"; //display all
+
+            conn = new SqlConnection(conStr);
+            comm = new SqlCommand(sql);
+            comm.Parameters.AddWithValue("@StudentNumber", txtStudentNum.Text);
+            conn.Open();
+            adap = new SqlDataAdapter(comm);
+            reader = comm.ExecuteReader();
+
+            while (reader.Read())
             {
-                //===Complete Action
+                string sNameSurname = reader.GetValue(2) +" "+ reader.GetValue(3);
+                lblStudentDetail.Text = sNameSurname + " WILL BE AFFECTED BY THIS REQUEST";
             }
-            else 
-            { 
-                //===Warm that they have not confirmed            
+
+            conn.Close();
+        }
+
+        private void frmPointschMachine_Load(object sender, EventArgs e)
+        {
+            string sNum = txtStudentNum.Text;
+            if (sActionType == "AD")//populate drop down with Discipline
+            {
+                sql = "SELECT Discipline_Type FROM Discipline_Type";
+
+                conn = new SqlConnection(conStr);
+                comm = new SqlCommand(sql);
+                conn.Open();
+                adap = new SqlDataAdapter(comm);
+                reader = comm.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string ActionType = reader.GetValue(1).ToString();
+                    cmbActionType.Items.Add(ActionType);
+                }
+            }
+
+
+            if (sActionType == "AI")//populate drop down with Infraction
+            {
+                sql = "SELECT Infraction_Type FROM Infraction_Type";
+
+                conn = new SqlConnection(conStr);
+                comm = new SqlCommand(sql);
+                conn.Open();
+                adap = new SqlDataAdapter(comm);
+                reader = comm.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string ActionType = reader.GetValue(1).ToString();
+                    cmbActionType.Items.Add(ActionType);
+                }
+            }
+
+            if (sActionType == "RD")//populate drop down with Discipline of student
+            {
+                sql = "SELECT Discipline_Discription, Discipline_Date FROM Discipline WHERE (Student_NWU_ID = @StudentNumber)";
+
+                conn = new SqlConnection(conStr);
+                comm = new SqlCommand(sql);
+                comm.Parameters.AddWithValue("@StudentNumber", sNum);
+                conn.Open();
+                adap = new SqlDataAdapter(comm);
+                reader = comm.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string ActionType = reader.GetValue(4).ToString();
+                    cmbActionType.Items.Add(ActionType);
+                }
+            }
+
+            if (sActionType == "RI")//populate drop down with Infractions of student
+            {
+                sql = "SELECT Infraction_Discription, Infraction_Date FROM Infraction WHERE (Student_NWU_ID = @StudentNumber)";
+
+                conn = new SqlConnection(conStr);
+                comm = new SqlCommand(sql);
+                comm.Parameters.AddWithValue("@StudentNumber", sNum);
+                conn.Open();
+                adap = new SqlDataAdapter(comm);
+                reader = comm.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string ActionType = reader.GetValue(4).ToString();
+                    cmbActionType.Items.Add(ActionType);
+                }
+            }
+        }
+
+        private void cmbActionType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (sActionType == "RI")//populate rtb with Infraction  date of selected discription
+            {
+                sql = "SELECT Infraction_Discription, Infraction_Date FROM Infraction WHERE (Infraction_Discription = @discription)";
+
+                conn = new SqlConnection(conStr);
+                comm = new SqlCommand(sql);
+                comm.Parameters.AddWithValue("@discription", cmbActionType.SelectedItem);
+                conn.Open();
+                adap = new SqlDataAdapter(comm);
+                reader = comm.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string ActionType = reader.GetValue(3).ToString() + "\n" + reader.GetValue(4).ToString();
+                    rtbDiscription.Text = ActionType;
+                }
+            }
+
+            if (sActionType == "RI")///populate rtb with Discipline date of selected discription
+            {
+                sql = "SELECT Discipline_Discription, Discipline_Date FROM Discipline WHERE (Discipline_Discription = @discription)";
+
+                conn = new SqlConnection(conStr);
+                comm = new SqlCommand(sql);
+                comm.Parameters.AddWithValue("@discription", cmbActionType.SelectedItem);
+                conn.Open();
+                adap = new SqlDataAdapter(comm);
+                reader = comm.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string ActionType = reader.GetValue(3).ToString() + "\n" + reader.GetValue(4).ToString();
+                    rtbDiscription.Text = ActionType;
+                }
             }
         }
     }

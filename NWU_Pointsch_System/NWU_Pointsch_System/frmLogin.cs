@@ -172,7 +172,7 @@ namespace NWU_Pointsch_System
                     while (reader.Read())
                     {
                         string temp = reader.GetString(0);
-                        if (tempStudentNum == temp)
+                        if (tempStadminNum == temp)
                         {
                             StadminNumber = txtUser.Text;
                             frmStadmin fStadmin = new frmStadmin();
