@@ -22,6 +22,8 @@ namespace NWU_Pointsch_System
         SqlDataReader reader;
         string sql = "";
 
+        //hello die is n toets
+
         //====DELETE
         private bool bDev = true;
         //====DELETE
