@@ -50,16 +50,18 @@ namespace NWU_Pointsch_System
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(616, 637);
+            this.txtUser.Location = new System.Drawing.Point(262, 286);
+            this.txtUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(445, 31);
+            this.txtUser.Size = new System.Drawing.Size(224, 20);
             this.txtUser.TabIndex = 0;
             // 
             // txtIDNumber
             // 
-            this.txtIDNumber.Location = new System.Drawing.Point(616, 710);
+            this.txtIDNumber.Location = new System.Drawing.Point(262, 324);
+            this.txtIDNumber.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtIDNumber.Name = "txtIDNumber";
-            this.txtIDNumber.Size = new System.Drawing.Size(445, 31);
+            this.txtIDNumber.Size = new System.Drawing.Size(224, 20);
             this.txtIDNumber.TabIndex = 2;
             // 
             // picbNWUPointschLogo
@@ -68,35 +70,39 @@ namespace NWU_Pointsch_System
             this.picbNWUPointschLogo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picbNWUPointschLogo.BackgroundImage")));
             this.picbNWUPointschLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picbNWUPointschLogo.InitialImage = ((System.Drawing.Image)(resources.GetObject("picbNWUPointschLogo.InitialImage")));
-            this.picbNWUPointschLogo.Location = new System.Drawing.Point(616, 155);
+            this.picbNWUPointschLogo.Location = new System.Drawing.Point(267, 35);
+            this.picbNWUPointschLogo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.picbNWUPointschLogo.Name = "picbNWUPointschLogo";
-            this.picbNWUPointschLogo.Size = new System.Drawing.Size(445, 441);
+            this.picbNWUPointschLogo.Size = new System.Drawing.Size(217, 220);
             this.picbNWUPointschLogo.TabIndex = 3;
             this.picbNWUPointschLogo.TabStop = false;
             // 
             // lblUser
             // 
             this.lblUser.AutoSize = true;
-            this.lblUser.Location = new System.Drawing.Point(611, 609);
+            this.lblUser.Location = new System.Drawing.Point(260, 272);
+            this.lblUser.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(287, 25);
+            this.lblUser.Size = new System.Drawing.Size(150, 13);
             this.lblUser.TabIndex = 4;
             this.lblUser.Text = "STAFF/STUDENT NUMBER:";
             // 
             // lblID
             // 
             this.lblID.AutoSize = true;
-            this.lblID.Location = new System.Drawing.Point(611, 682);
+            this.lblID.Location = new System.Drawing.Point(260, 310);
+            this.lblID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(135, 25);
+            this.lblID.Size = new System.Drawing.Size(71, 13);
             this.lblID.TabIndex = 5;
             this.lblID.Text = "ID NUMBER:";
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(616, 759);
+            this.btnLogin.Location = new System.Drawing.Point(262, 350);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(192, 47);
+            this.btnLogin.Size = new System.Drawing.Size(96, 24);
             this.btnLogin.TabIndex = 6;
             this.btnLogin.Text = "LOGIN";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -104,9 +110,10 @@ namespace NWU_Pointsch_System
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(872, 759);
+            this.btnExit.Location = new System.Drawing.Point(390, 350);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(189, 47);
+            this.btnExit.Size = new System.Drawing.Size(94, 24);
             this.btnExit.TabIndex = 7;
             this.btnExit.Text = "EXIT";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -116,9 +123,10 @@ namespace NWU_Pointsch_System
             // 
             this.picbPurpleThing.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picbPurpleThing.BackgroundImage")));
             this.picbPurpleThing.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picbPurpleThing.Location = new System.Drawing.Point(-297, -469);
+            this.picbPurpleThing.Location = new System.Drawing.Point(-148, -244);
+            this.picbPurpleThing.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.picbPurpleThing.Name = "picbPurpleThing";
-            this.picbPurpleThing.Size = new System.Drawing.Size(670, 1942);
+            this.picbPurpleThing.Size = new System.Drawing.Size(335, 1010);
             this.picbPurpleThing.TabIndex = 8;
             this.picbPurpleThing.TabStop = false;
             // 
@@ -126,9 +134,10 @@ namespace NWU_Pointsch_System
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(1372, -469);
+            this.pictureBox1.Location = new System.Drawing.Point(686, -244);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(17, 1942);
+            this.pictureBox1.Size = new System.Drawing.Size(8, 1010);
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
@@ -136,9 +145,10 @@ namespace NWU_Pointsch_System
             // 
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(1395, -521);
+            this.pictureBox2.Location = new System.Drawing.Point(698, -271);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(17, 1942);
+            this.pictureBox2.Size = new System.Drawing.Size(8, 1010);
             this.pictureBox2.TabIndex = 10;
             this.pictureBox2.TabStop = false;
             // 
@@ -146,18 +156,19 @@ namespace NWU_Pointsch_System
             // 
             this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox3.Location = new System.Drawing.Point(1418, -510);
+            this.pictureBox3.Location = new System.Drawing.Point(709, -265);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(17, 1942);
+            this.pictureBox3.Size = new System.Drawing.Size(8, 1010);
             this.pictureBox3.TabIndex = 11;
             this.pictureBox3.TabStop = false;
             // 
             // frmLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1436, 1009);
+            this.ClientSize = new System.Drawing.Size(717, 434);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
@@ -171,6 +182,7 @@ namespace NWU_Pointsch_System
             this.Controls.Add(this.txtUser);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "User Login";

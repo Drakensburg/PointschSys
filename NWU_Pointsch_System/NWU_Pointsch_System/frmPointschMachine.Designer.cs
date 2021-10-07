@@ -37,6 +37,8 @@ namespace NWU_Pointsch_System
             this.btnBack = new System.Windows.Forms.Button();
             this.lblAction = new System.Windows.Forms.GroupBox();
             this.gbAction = new System.Windows.Forms.GroupBox();
+            this.txtPointschValue = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.rtbDiscription = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -46,8 +48,6 @@ namespace NWU_Pointsch_System
             this.txtStudentNum = new System.Windows.Forms.TextBox();
             this.btnGetStudent = new System.Windows.Forms.Button();
             this.btnFinalize = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtPointschValue = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picbPurpleThing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -144,6 +144,24 @@ namespace NWU_Pointsch_System
             this.gbAction.TabStop = false;
             this.gbAction.Text = "ACTION DETAILS:";
             // 
+            // txtPointschValue
+            // 
+            this.txtPointschValue.Location = new System.Drawing.Point(104, 63);
+            this.txtPointschValue.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPointschValue.Name = "txtPointschValue";
+            this.txtPointschValue.Size = new System.Drawing.Size(71, 20);
+            this.txtPointschValue.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 66);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "POINTSCH:";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -233,28 +251,11 @@ namespace NWU_Pointsch_System
             this.btnFinalize.UseVisualStyleBackColor = true;
             this.btnFinalize.Click += new System.EventHandler(this.btnFinalize_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 66);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "POINTSCH:";
-            // 
-            // txtPointschValue
-            // 
-            this.txtPointschValue.Location = new System.Drawing.Point(104, 63);
-            this.txtPointschValue.Margin = new System.Windows.Forms.Padding(2);
-            this.txtPointschValue.Name = "txtPointschValue";
-            this.txtPointschValue.Size = new System.Drawing.Size(71, 20);
-            this.txtPointschValue.TabIndex = 6;
-            // 
             // frmPointschMachine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(708, 430);
             this.Controls.Add(this.btnFinalize);
             this.Controls.Add(this.lblAction);
