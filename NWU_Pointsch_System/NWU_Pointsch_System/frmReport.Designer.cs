@@ -36,6 +36,7 @@ namespace NWU_Pointsch_System
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lstReport = new System.Windows.Forms.ListBox();
             this.gbReportOptions = new System.Windows.Forms.GroupBox();
+            this.rbBoth = new System.Windows.Forms.RadioButton();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
@@ -45,11 +46,10 @@ namespace NWU_Pointsch_System
             this.rbDesc = new System.Windows.Forms.RadioButton();
             this.rbAsc = new System.Windows.Forms.RadioButton();
             this.gbActions = new System.Windows.Forms.GroupBox();
+            this.rbInfraction = new System.Windows.Forms.RadioButton();
+            this.rbDiscipline = new System.Windows.Forms.RadioButton();
             this.gbMonth = new System.Windows.Forms.GroupBox();
             this.cmbMonth = new System.Windows.Forms.ComboBox();
-            this.rbBoth = new System.Windows.Forms.RadioButton();
-            this.rbDiscipline = new System.Windows.Forms.RadioButton();
-            this.rbInfraction = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.picbPurpleThing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -129,6 +129,17 @@ namespace NWU_Pointsch_System
             this.gbReportOptions.TabIndex = 21;
             this.gbReportOptions.TabStop = false;
             this.gbReportOptions.Text = "REPORT OPTIONS";
+            // 
+            // rbBoth
+            // 
+            this.rbBoth.AutoSize = true;
+            this.rbBoth.Location = new System.Drawing.Point(35, 156);
+            this.rbBoth.Name = "rbBoth";
+            this.rbBoth.Size = new System.Drawing.Size(47, 17);
+            this.rbBoth.TabIndex = 0;
+            this.rbBoth.TabStop = true;
+            this.rbBoth.Text = "Both";
+            this.rbBoth.UseVisualStyleBackColor = true;
             // 
             // btnBack
             // 
@@ -225,6 +236,28 @@ namespace NWU_Pointsch_System
             this.gbActions.TabStop = false;
             this.gbActions.Text = "Filter by action";
             // 
+            // rbInfraction
+            // 
+            this.rbInfraction.AutoSize = true;
+            this.rbInfraction.Location = new System.Drawing.Point(6, 65);
+            this.rbInfraction.Name = "rbInfraction";
+            this.rbInfraction.Size = new System.Drawing.Size(69, 17);
+            this.rbInfraction.TabIndex = 2;
+            this.rbInfraction.TabStop = true;
+            this.rbInfraction.Text = "Infraction";
+            this.rbInfraction.UseVisualStyleBackColor = true;
+            // 
+            // rbDiscipline
+            // 
+            this.rbDiscipline.AutoSize = true;
+            this.rbDiscipline.Location = new System.Drawing.Point(6, 42);
+            this.rbDiscipline.Name = "rbDiscipline";
+            this.rbDiscipline.Size = new System.Drawing.Size(70, 17);
+            this.rbDiscipline.TabIndex = 1;
+            this.rbDiscipline.TabStop = true;
+            this.rbDiscipline.Text = "Discipline";
+            this.rbDiscipline.UseVisualStyleBackColor = true;
+            // 
             // gbMonth
             // 
             this.gbMonth.Controls.Add(this.cmbMonth);
@@ -256,44 +289,12 @@ namespace NWU_Pointsch_System
             this.cmbMonth.Size = new System.Drawing.Size(250, 21);
             this.cmbMonth.TabIndex = 0;
             // 
-            // rbBoth
-            // 
-            this.rbBoth.AutoSize = true;
-            this.rbBoth.Location = new System.Drawing.Point(35, 156);
-            this.rbBoth.Name = "rbBoth";
-            this.rbBoth.Size = new System.Drawing.Size(47, 17);
-            this.rbBoth.TabIndex = 0;
-            this.rbBoth.TabStop = true;
-            this.rbBoth.Text = "Both";
-            this.rbBoth.UseVisualStyleBackColor = true;
-            // 
-            // rbDiscipline
-            // 
-            this.rbDiscipline.AutoSize = true;
-            this.rbDiscipline.Location = new System.Drawing.Point(6, 42);
-            this.rbDiscipline.Name = "rbDiscipline";
-            this.rbDiscipline.Size = new System.Drawing.Size(70, 17);
-            this.rbDiscipline.TabIndex = 1;
-            this.rbDiscipline.TabStop = true;
-            this.rbDiscipline.Text = "Discipline";
-            this.rbDiscipline.UseVisualStyleBackColor = true;
-            // 
-            // rbInfraction
-            // 
-            this.rbInfraction.AutoSize = true;
-            this.rbInfraction.Location = new System.Drawing.Point(6, 65);
-            this.rbInfraction.Name = "rbInfraction";
-            this.rbInfraction.Size = new System.Drawing.Size(69, 17);
-            this.rbInfraction.TabIndex = 2;
-            this.rbInfraction.TabStop = true;
-            this.rbInfraction.Text = "Infraction";
-            this.rbInfraction.UseVisualStyleBackColor = true;
-            // 
             // frmReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(716, 554);
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(716, 548);
             this.Controls.Add(this.gbReportOptions);
             this.Controls.Add(this.lstReport);
             this.Controls.Add(this.pictureBox3);

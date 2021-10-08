@@ -77,5 +77,29 @@ namespace NWU_Pointsch_System
             frmReport fRep = new frmReport();
             fRep.Show();
         }
+
+        private void frmStadmin_Load(object sender, EventArgs e)
+        {
+            try 
+            {
+                string path;
+                
+                if (btnEditDB.Visible == true)
+                {
+                    path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\Assets\Person_Types\Admin.png";
+                    picbSoSA.Image = Image.FromFile(@path);
+                }
+                else
+                {
+                    path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\Assets\Person_Types\Staff.png";
+                    picbSoSA.Image = Image.FromFile(@path);
+                }
+            }
+            catch(Exception Ne)
+            {
+                picbSoSA.Visible = false;
+            }
+
+        }
     }
 }

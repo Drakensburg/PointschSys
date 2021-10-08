@@ -67,6 +67,7 @@ namespace NWU_Pointsch_System
             conn.Close();
 
             lblInfraction.Text = SUM2.ToString();//Infraction total
+            string path;
 
             if (SUM1 > SUM2)//Total
             {
@@ -74,11 +75,29 @@ namespace NWU_Pointsch_System
                 lblTotal.ForeColor = Color.Purple;
                 if((SUM1 - SUM2) > 20)
                 {
-                    picbStatus.Image = Image.FromFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + @"\Good.png");
+                    try 
+                    { 
+                    path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\Assets\Karmas\Good.png";
+                    picbStatus.Image = Image.FromFile(@path);
+                    }
+                    catch (Exception Ne)
+                    {
+                        picbStatus.Visible = false;
+                        picbSoSA.Visible = false;
+                    }
                 }
                 else
                 {
-                    picbStatus.Image = Image.FromFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + @"\Neutral.png");
+                    try
+                    { 
+                    path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\Assets\Karmas\Neutral.png";
+                    picbStatus.Image = Image.FromFile(@path);
+                    }
+                    catch (Exception Ne)
+                    {
+                        picbStatus.Visible = false;
+                        picbSoSA.Visible = false;
+                    }
                 }
             }
             else
@@ -87,14 +106,31 @@ namespace NWU_Pointsch_System
                 lblTotal.ForeColor = Color.DarkRed;
                 if ((SUM2 - SUM1) > 20)
                 {
-                    picbStatus.Image = Image.FromFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + @"\Bad.png");
+                    try 
+                    { 
+                    path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\Assets\Karmas\Bad.png";
+                    picbStatus.Image = Image.FromFile(@path);
+                    }
+                    catch (Exception Ne)
+                    {
+                        picbStatus.Visible = false;
+                        picbSoSA.Visible = false;
+                    }
                 }
                 else
                 {
-                    picbStatus.Image = Image.FromFile(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + @"\Neutral.png");
+                    try 
+                    { 
+                    path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\Assets\Karmas\Neutral.png";
+                    picbStatus.Image = Image.FromFile(@path);
+                    }
+                    catch (Exception Ne)
+                    {
+                        picbStatus.Visible = false;
+                        picbSoSA.Visible = false;
+                    }
                 }
             }
-
 
             sql = "SELECT Infraction_Date, Infraction_Discription, Infraction_Pointsch FROM Infraction WHERE (Student_NWU_ID = @StudentNumber)"; //display all
             
