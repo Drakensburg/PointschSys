@@ -48,28 +48,29 @@ namespace NWU_Pointsch_System
         private void btnAddDiscipline_Click(object sender, EventArgs e)
         {
             frmPointschMachine fPM = new frmPointschMachine();
+            fPM.sActionType = "AD";
             fPM.ShowDialog();
         }
 
         private void btnAddInfraction_Click(object sender, EventArgs e)
         {
             frmPointschMachine fPM = new frmPointschMachine();
-            fPM.ShowDialog();
             fPM.sActionType = "AI";
+            fPM.ShowDialog();
         }
 
         private void btnRemoveDiscipline_Click(object sender, EventArgs e)
         {
             frmPointschMachine fPM = new frmPointschMachine();
-            fPM.ShowDialog();
             fPM.sActionType = "RD";
+            fPM.ShowDialog();
         }
 
         private void btnRemoveInfraction_Click(object sender, EventArgs e)
         {
             frmPointschMachine fPM = new frmPointschMachine();
-            fPM.ShowDialog();
             fPM.sActionType = "RI";
+            fPM.ShowDialog();
         }
 
         private void btnReport_Click(object sender, EventArgs e)
@@ -84,19 +85,18 @@ namespace NWU_Pointsch_System
             int SUM2;
             string sNum = lblSnoPhys.Text;
             string path;
+
             try 
             {
-                
-                
                 if (btnEditDB.Visible == true)
                 {
-                    path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\Assets\Person_Types\Admin.png";
-                    picbSoSA.Image = Image.FromFile(@path);
+                    path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + "\\Assets\\Person_Types\\Admin.png";
+                    picbSoSA.Image = Image.FromFile(@path.Substring(6));
                 }
                 else
                 {
-                    path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\Assets\Person_Types\Staff.png";
-                    picbSoSA.Image = Image.FromFile(@path);
+                    path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + "\\Assets\\Person_Types\\Staff.png";
+                    picbSoSA.Image = Image.FromFile(@path.Substring(6));
                 }
             }
             catch(Exception Ne)
@@ -106,12 +106,12 @@ namespace NWU_Pointsch_System
 
             try
             {
-                sql = "SELECT SUM(Discipline_Pointsch) AS POINTS FROM Discipline WHERE Staff_NWU_ID = @StudentNumber"; //get the accumulate Discipline pointsch
+                sql = "SELECT SUM(Discipline_Pointsch) AS POINTS FROM Discipline WHERE Staff_NWU_ID = @StaffNumber"; //get the accumulate Discipline pointsch
 
                 conn = new SqlConnection(conStr);
                 conn.Open();
                 comm = new SqlCommand(sql, conn);
-                comm.Parameters.AddWithValue("@StudentNumber", sNum);
+                comm.Parameters.AddWithValue("@StaffNumber", sNum);
                 adap = new SqlDataAdapter(comm);
                 ds = new DataSet();
                 adap.Fill(ds);
@@ -123,17 +123,18 @@ namespace NWU_Pointsch_System
             catch(Exception)
             {
                 SUM1 = 0;
+                lbDiscipline.Items.Add("--NONE--");
             }
             
 
             try
             {
-                sql = "SELECT SUM(Infraction_Pointsch) AS POINTS FROM Infraction WHERE Staff_NWU_ID = @StudentNumber"; //get the accumulate Infraction pointsch
+                sql = "SELECT SUM(Infraction_Pointsch) AS POINTS FROM Infraction WHERE Staff_NWU_ID = @StaffNumber"; //get the accumulate Infraction pointsch
 
                 conn = new SqlConnection(conStr);
                 conn.Open();
                 comm = new SqlCommand(sql, conn);
-                comm.Parameters.AddWithValue("@StudentNumber", sNum);
+                comm.Parameters.AddWithValue("@StaffNumber", sNum);
                 adap = new SqlDataAdapter(comm);
                 ds = new DataSet();
                 adap.Fill(ds);
@@ -145,6 +146,7 @@ namespace NWU_Pointsch_System
             catch(Exception)
             {
                 SUM2 = 0;
+                lbInfraction.Items.Add("--NONE--");
             }
             
 
@@ -153,77 +155,27 @@ namespace NWU_Pointsch_System
             {
                 lblSum.Text = (SUM1 - SUM2).ToString();
                 lblSum.ForeColor = Color.Purple;
-                if ((SUM1 - SUM2) > 20)
-                {
-                    try
-                    {
-                        path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\Assets\Karmas\Good.png";
-                        picbStatus.Image = Image.FromFile(@path);
-                    }
-                    catch (Exception Ne)
-                    {
-                        picbStatus.Visible = false;
-                        picbSoSA.Visible = false;
-                    }
-                }
-                else
-                {
-                    try
-                    {
-                        path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\Assets\Karmas\Neutral.png";
-                        picbStatus.Image = Image.FromFile(@path);
-                    }
-                    catch (Exception Ne)
-                    {
-                        picbStatus.Visible = false;
-                        picbSoSA.Visible = false;
-                    }
-                }
             }
             else
             {
                 lblSum.Text = (SUM2 - SUM1).ToString();
                 lblSum.ForeColor = Color.DarkRed;
-                if ((SUM2 - SUM1) > 20)
-                {
-                    try
-                    {
-                        path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\Assets\Karmas\Bad.png";
-                        picbStatus.Image = Image.FromFile(@path);
-                    }
-                    catch (Exception Ne)
-                    {
-                        picbStatus.Visible = false;
-                        picbSoSA.Visible = false;
-                    }
-                }
-                else
-                {
-                    try
-                    {
-                        path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\Assets\Karmas\Neutral.png";
-                        picbStatus.Image = Image.FromFile(@path);
-                    }
-                    catch (Exception Ne)
-                    {
-                        picbStatus.Visible = false;
-                        picbSoSA.Visible = false;
-                    }
-                }
             }
 
-            sql = "SELECT Infraction_Date, Infraction_Description, Infraction_Pointsch FROM Infraction WHERE (Staff_NWU_ID = @StudentNumber)"; //make a lis of Infractions
+            sql = "SELECT Infraction_Date, Infraction_Description, Infraction_Pointsch, Student_NWU_ID FROM Infraction WHERE (Staff_NWU_ID = @StaffNumber)"; //make a lis of Infractions
 
             conn = new SqlConnection(conStr);
             conn.Open();
             comm = new SqlCommand(sql, conn);
-            comm.Parameters.AddWithValue("@StudentNumber", sNum);
+            comm.Parameters.AddWithValue("@StaffNumber", sNum);
             adap = new SqlDataAdapter(comm);
             reader = comm.ExecuteReader();
 
             while (reader.Read())
             {
                 string output = "Date: " + reader.GetValue(0);
+                lbInfraction.Items.Add(output);
+                output = "Student: " + reader.GetValue(3);
                 lbInfraction.Items.Add(output);
                 output = "Description: " + reader.GetValue(1);
                 lbInfraction.Items.Add(output);
@@ -235,18 +187,20 @@ namespace NWU_Pointsch_System
             conn.Close();
 
 
-            sql = "SELECT Discipline_Date, Discipline_Description, Discipline_Pointsch FROM Discipline WHERE (Staff_NWU_ID = @StudentNumber)"; //make a list of Discipline's
+            sql = "SELECT Discipline_Date, Discipline_Description, Discipline_Pointsch, Student_NWU_ID FROM Discipline WHERE (Staff_NWU_ID = @StaffNumber)"; //make a list of Discipline's
 
             conn = new SqlConnection(conStr);
             conn.Open();
             comm = new SqlCommand(sql, conn);
-            comm.Parameters.AddWithValue("@StudentNumber", sNum);
+            comm.Parameters.AddWithValue("@StaffNumber", sNum);
             adap = new SqlDataAdapter(comm);
             reader = comm.ExecuteReader();
 
             while (reader.Read())
             {
                 string output = "Date: " + reader.GetValue(0);
+                lbDiscipline.Items.Add(output);
+                output = "Student: " + reader.GetValue(3);
                 lbDiscipline.Items.Add(output);
                 output = "Description: " + reader.GetValue(1);
                 lbDiscipline.Items.Add(output);
