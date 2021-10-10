@@ -140,6 +140,7 @@ namespace NWU_Pointsch_System
             this.rbBoth.TabStop = true;
             this.rbBoth.Text = "Both";
             this.rbBoth.UseVisualStyleBackColor = true;
+            this.rbBoth.CheckedChanged += new System.EventHandler(this.rbBoth_CheckedChanged);
             // 
             // btnBack
             // 
@@ -169,6 +170,7 @@ namespace NWU_Pointsch_System
             this.btnFilter.TabIndex = 5;
             this.btnFilter.Text = "Filter";
             this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // gbCampus
             // 
@@ -213,6 +215,7 @@ namespace NWU_Pointsch_System
             this.rbDesc.TabStop = true;
             this.rbDesc.Text = "Descending";
             this.rbDesc.UseVisualStyleBackColor = true;
+            this.rbDesc.CheckedChanged += new System.EventHandler(this.rbDesc_CheckedChanged);
             // 
             // rbAsc
             // 
@@ -224,6 +227,7 @@ namespace NWU_Pointsch_System
             this.rbAsc.TabStop = true;
             this.rbAsc.Text = "Ascending";
             this.rbAsc.UseVisualStyleBackColor = true;
+            this.rbAsc.CheckedChanged += new System.EventHandler(this.rbAsc_CheckedChanged);
             // 
             // gbActions
             // 
@@ -246,6 +250,7 @@ namespace NWU_Pointsch_System
             this.rbInfraction.TabStop = true;
             this.rbInfraction.Text = "Infraction";
             this.rbInfraction.UseVisualStyleBackColor = true;
+            this.rbInfraction.CheckedChanged += new System.EventHandler(this.rbInfraction_CheckedChanged);
             // 
             // rbDiscipline
             // 
@@ -257,6 +262,7 @@ namespace NWU_Pointsch_System
             this.rbDiscipline.TabStop = true;
             this.rbDiscipline.Text = "Discipline";
             this.rbDiscipline.UseVisualStyleBackColor = true;
+            this.rbDiscipline.CheckedChanged += new System.EventHandler(this.rbDiscipline_CheckedChanged);
             // 
             // gbMonth
             // 
