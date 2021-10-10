@@ -18,7 +18,6 @@ namespace NWU_Pointsch_System
         SqlConnection conn;   //all my public statements
         SqlCommand comm,comm2;
         SqlDataAdapter adap;
-        DataSet ds;
         SqlDataReader reader;
         string sql, sql2 = "";
 
@@ -42,6 +41,8 @@ namespace NWU_Pointsch_System
 
         private void btnFinalize_Click(object sender, EventArgs e)
         {
+            DateTime currentDateTime = DateTime.Now;
+            //MessageBox.Show(currentDateTime.ToString());
             if (sActionType == "AD")
             {
                 sql = "INSERT INTO Discipline(Discipline_Date, Discipline_Discription, Discipline_Pointsch) VALUES (@Date, @Discription, @Pointsch) WHERE (Student_NWU_ID = @StudentNumber)";  // Isert new Discipline record ///////////////////////ek dink die sal werk maar maak net seker asb emile want dis oor versilende tables
@@ -50,7 +51,7 @@ namespace NWU_Pointsch_System
                 conn = new SqlConnection(conStr);
                 comm.Parameters.AddWithValue("@StudentNumber", txtStudentNum.Text);
                 comm.Parameters.AddWithValue("@Type", cmbActionType.SelectedItem.ToString());
-                comm.Parameters.AddWithValue("@Date", DateTime.Now);
+                comm.Parameters.AddWithValue("@Date", currentDateTime.ToString());
                 comm.Parameters.AddWithValue("@Discription", rtbDiscription.Text);
                 comm.Parameters.AddWithValue("@Pointsch", txtPointschValue.Text);
                 conn.Open();
@@ -72,7 +73,7 @@ namespace NWU_Pointsch_System
                 conn = new SqlConnection(conStr);
                 comm.Parameters.AddWithValue("@StudentNumber", txtStudentNum.Text);
                 comm.Parameters.AddWithValue("@Type", cmbActionType.SelectedItem.ToString());
-                comm.Parameters.AddWithValue("@Date", DateTime.Now);
+                comm.Parameters.AddWithValue("@Date", currentDateTime);
                 comm.Parameters.AddWithValue("@Discription", rtbDiscription.Text);
                 comm.Parameters.AddWithValue("@Pointsch", txtPointschValue.Text);
                 conn.Open();
@@ -92,19 +93,24 @@ namespace NWU_Pointsch_System
             sql = "SELECT Student_Name, Student_Surname FROM Student WHERE (Student_NWU_ID = @StudentNumber)"; // Find student name surname acording to student num filled in
 
             conn = new SqlConnection(conStr);
-            comm = new SqlCommand(sql);
-            comm.Parameters.AddWithValue("@StudentNumber", txtStudentNum.Text);
+            comm = new SqlCommand(sql, conn);
             conn.Open();
+            comm.Parameters.AddWithValue("@StudentNumber", txtStudentNum.Text);
             adap = new SqlDataAdapter(comm);
             reader = comm.ExecuteReader();
 
             while (reader.Read())
             {
-                string sNameSurname = reader.GetValue(2) +" "+ reader.GetValue(3);
+                string sNameSurname = reader.GetValue(0) +" "+ reader.GetValue(1);
                 lblStudentDetail.Text = sNameSurname + " WILL BE AFFECTED BY THIS REQUEST";
             }
 
             conn.Close();
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void frmPointschMachine_Load(object sender, EventArgs e)
@@ -115,110 +121,44 @@ namespace NWU_Pointsch_System
                 sql = "SELECT Discipline_Type FROM Discipline_Type";
 
                 conn = new SqlConnection(conStr);
-                comm = new SqlCommand(sql);
+                comm = new SqlCommand(sql, conn);
                 conn.Open();
                 adap = new SqlDataAdapter(comm);
                 reader = comm.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    string ActionType = reader.GetValue(1).ToString();
+                    string ActionType = reader.GetValue(0).ToString();
                     cmbActionType.Items.Add(ActionType);
                 }
             }
-
-
-            if (sActionType == "AI")//populate drop down with Infraction
+            else if (sActionType == "AI")//populate drop down with Infraction
             {
                 sql = "SELECT Infraction_Type FROM Infraction_Type";
 
                 conn = new SqlConnection(conStr);
-                comm = new SqlCommand(sql);
+                comm = new SqlCommand(sql, conn);
                 conn.Open();
                 adap = new SqlDataAdapter(comm);
                 reader = comm.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    string ActionType = reader.GetValue(1).ToString();
+                    string ActionType = reader.GetValue(0).ToString();
                     cmbActionType.Items.Add(ActionType);
                 }
             }
-
-            if (sActionType == "RD")//populate drop down with Discipline of student
+            else
             {
-                sql = "SELECT Discipline_Discription, Discipline_Date FROM Discipline WHERE (Student_NWU_ID = @StudentNumber)";
-
-                conn = new SqlConnection(conStr);
-                comm = new SqlCommand(sql);
-                comm.Parameters.AddWithValue("@StudentNumber", sNum);
-                conn.Open();
-                adap = new SqlDataAdapter(comm);
-                reader = comm.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    string ActionType = reader.GetValue(4).ToString();
-                    cmbActionType.Items.Add(ActionType);
-                }
-            }
-
-            if (sActionType == "RI")//populate drop down with Infractions of student
-            {
-                sql = "SELECT Infraction_Discription, Infraction_Date FROM Infraction WHERE (Student_NWU_ID = @StudentNumber)";
-
-                conn = new SqlConnection(conStr);
-                comm = new SqlCommand(sql);
-                comm.Parameters.AddWithValue("@StudentNumber", sNum);
-                conn.Open();
-                adap = new SqlDataAdapter(comm);
-                reader = comm.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    string ActionType = reader.GetValue(4).ToString();
-                    cmbActionType.Items.Add(ActionType);
-                }
+                MessageBox.Show("No ActionType");
             }
         }
 
         private void cmbActionType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (sActionType == "RI")//populate rtb with Infraction  date of selected discription
-            {
-                sql = "SELECT Infraction_Discription, Infraction_Date FROM Infraction WHERE (Infraction_Discription = @discription)";
-
-                conn = new SqlConnection(conStr);
-                comm = new SqlCommand(sql);
-                comm.Parameters.AddWithValue("@discription", cmbActionType.SelectedItem);
-                conn.Open();
-                adap = new SqlDataAdapter(comm);
-                reader = comm.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    string ActionType = reader.GetValue(3).ToString() + "\n" + reader.GetValue(4).ToString();
-                    rtbDiscription.Text = ActionType;
-                }
-            }
-
-            if (sActionType == "RI")//populate rtb with Discipline date of selected discription
-            {
-                sql = "SELECT Discipline_Discription, Discipline_Date FROM Discipline WHERE (Discipline_Discription = @discription)";
-
-                conn = new SqlConnection(conStr);
-                comm = new SqlCommand(sql);
-                comm.Parameters.AddWithValue("@discription", cmbActionType.SelectedItem);
-                conn.Open();
-                adap = new SqlDataAdapter(comm);
-                reader = comm.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    string ActionType = reader.GetValue(3).ToString() + "\n" + reader.GetValue(4).ToString();
-                    rtbDiscription.Text = ActionType;
-                }
-            }
+            
+      
+            
         }
     }
 }
