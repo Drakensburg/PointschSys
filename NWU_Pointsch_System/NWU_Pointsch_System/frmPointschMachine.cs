@@ -49,7 +49,7 @@ namespace NWU_Pointsch_System
 
                 conn = new SqlConnection(conStr);
                 comm.Parameters.AddWithValue("@StudentNumber", txtStudentNum.Text);
-                comm.Parameters.AddWithValue("@Type", cmbActionType.SelectedItem);
+                comm.Parameters.AddWithValue("@Type", cmbActionType.SelectedItem.ToString());
                 comm.Parameters.AddWithValue("@Date", DateTime.Now);
                 comm.Parameters.AddWithValue("@Discription", rtbDiscription.Text);
                 comm.Parameters.AddWithValue("@Pointsch", txtPointschValue.Text);
@@ -71,7 +71,7 @@ namespace NWU_Pointsch_System
 
                 conn = new SqlConnection(conStr);
                 comm.Parameters.AddWithValue("@StudentNumber", txtStudentNum.Text);
-                comm.Parameters.AddWithValue("@Type", cmbActionType.SelectedItem);
+                comm.Parameters.AddWithValue("@Type", cmbActionType.SelectedItem.ToString());
                 comm.Parameters.AddWithValue("@Date", DateTime.Now);
                 comm.Parameters.AddWithValue("@Discription", rtbDiscription.Text);
                 comm.Parameters.AddWithValue("@Pointsch", txtPointschValue.Text);

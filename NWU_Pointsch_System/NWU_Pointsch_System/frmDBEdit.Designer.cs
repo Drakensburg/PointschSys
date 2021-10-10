@@ -35,7 +35,7 @@ namespace NWU_Pointsch_System
             this.btnBack = new System.Windows.Forms.Button();
             this.gbPersonalInformation = new System.Windows.Forms.GroupBox();
             this.lblCampus = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbCampus = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbPosition = new System.Windows.Forms.ComboBox();
             this.lblID = new System.Windows.Forms.Label();
@@ -53,15 +53,12 @@ namespace NWU_Pointsch_System
             this.btnPIAdd = new System.Windows.Forms.Button();
             this.lblTypeName = new System.Windows.Forms.Label();
             this.lblWorth = new System.Windows.Forms.Label();
-            this.cbConfirm = new System.Windows.Forms.CheckBox();
-            this.lblNewType = new System.Windows.Forms.Label();
-            this.txtWorth = new System.Windows.Forms.TextBox();
+            this.txtMin = new System.Windows.Forms.TextBox();
             this.txtTypeName = new System.Windows.Forms.TextBox();
-            this.txtNewType = new System.Windows.Forms.TextBox();
             this.lblDI = new System.Windows.Forms.Label();
             this.cbDI = new System.Windows.Forms.ComboBox();
-            this.lblType = new System.Windows.Forms.Label();
-            this.cbTpe = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtMax = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPointsch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picbPurpleThing)).BeginInit();
             this.gbPersonalInformation.SuspendLayout();
@@ -104,7 +101,7 @@ namespace NWU_Pointsch_System
             // gbPersonalInformation
             // 
             this.gbPersonalInformation.Controls.Add(this.lblCampus);
-            this.gbPersonalInformation.Controls.Add(this.comboBox1);
+            this.gbPersonalInformation.Controls.Add(this.cbCampus);
             this.gbPersonalInformation.Controls.Add(this.label1);
             this.gbPersonalInformation.Controls.Add(this.cbPosition);
             this.gbPersonalInformation.Controls.Add(this.lblID);
@@ -136,19 +133,19 @@ namespace NWU_Pointsch_System
             this.lblCampus.TabIndex = 27;
             this.lblCampus.Text = "CAMPUS:";
             // 
-            // comboBox1
+            // cbCampus
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cbCampus.FormattingEnabled = true;
+            this.cbCampus.Items.AddRange(new object[] {
             "Potchefstroom",
             "Mafikeng",
             "Vaal"});
-            this.comboBox1.Location = new System.Drawing.Point(58, 73);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(101, 21);
-            this.comboBox1.TabIndex = 26;
-            this.comboBox1.Text = "SELECT";
+            this.cbCampus.Location = new System.Drawing.Point(58, 73);
+            this.cbCampus.Margin = new System.Windows.Forms.Padding(2);
+            this.cbCampus.Name = "cbCampus";
+            this.cbCampus.Size = new System.Drawing.Size(101, 21);
+            this.cbCampus.TabIndex = 26;
+            this.cbCampus.Text = "SELECT";
             // 
             // label1
             // 
@@ -255,6 +252,7 @@ namespace NWU_Pointsch_System
             this.button1.TabIndex = 14;
             this.button1.Text = "REMOVE";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -269,19 +267,16 @@ namespace NWU_Pointsch_System
             // 
             // gbPointschInformation
             // 
+            this.gbPointschInformation.Controls.Add(this.txtMax);
+            this.gbPointschInformation.Controls.Add(this.label2);
             this.gbPointschInformation.Controls.Add(this.btnPIRemove);
             this.gbPointschInformation.Controls.Add(this.btnPIAdd);
             this.gbPointschInformation.Controls.Add(this.lblTypeName);
             this.gbPointschInformation.Controls.Add(this.lblWorth);
-            this.gbPointschInformation.Controls.Add(this.cbConfirm);
-            this.gbPointschInformation.Controls.Add(this.lblNewType);
-            this.gbPointschInformation.Controls.Add(this.txtWorth);
+            this.gbPointschInformation.Controls.Add(this.txtMin);
             this.gbPointschInformation.Controls.Add(this.txtTypeName);
-            this.gbPointschInformation.Controls.Add(this.txtNewType);
             this.gbPointschInformation.Controls.Add(this.lblDI);
             this.gbPointschInformation.Controls.Add(this.cbDI);
-            this.gbPointschInformation.Controls.Add(this.lblType);
-            this.gbPointschInformation.Controls.Add(this.cbTpe);
             this.gbPointschInformation.Location = new System.Drawing.Point(445, 305);
             this.gbPointschInformation.Margin = new System.Windows.Forms.Padding(2);
             this.gbPointschInformation.Name = "gbPointschInformation";
@@ -300,6 +295,7 @@ namespace NWU_Pointsch_System
             this.btnPIRemove.TabIndex = 12;
             this.btnPIRemove.Text = "REMOVE";
             this.btnPIRemove.UseVisualStyleBackColor = true;
+            this.btnPIRemove.Click += new System.EventHandler(this.btnPIRemove_Click);
             // 
             // btnPIAdd
             // 
@@ -310,71 +306,44 @@ namespace NWU_Pointsch_System
             this.btnPIAdd.TabIndex = 11;
             this.btnPIAdd.Text = "ADD";
             this.btnPIAdd.UseVisualStyleBackColor = true;
+            this.btnPIAdd.Click += new System.EventHandler(this.btnPIAdd_Click);
             // 
             // lblTypeName
             // 
             this.lblTypeName.AutoSize = true;
-            this.lblTypeName.Location = new System.Drawing.Point(3, 78);
+            this.lblTypeName.Location = new System.Drawing.Point(4, 39);
             this.lblTypeName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTypeName.Name = "lblTypeName";
-            this.lblTypeName.Size = new System.Drawing.Size(72, 13);
+            this.lblTypeName.Size = new System.Drawing.Size(207, 13);
             this.lblTypeName.TabIndex = 10;
-            this.lblTypeName.Text = "TYPE NAME:";
+            this.lblTypeName.Text = "TYPE NAME (if removing only fill this field):";
             // 
             // lblWorth
             // 
             this.lblWorth.AutoSize = true;
-            this.lblWorth.Location = new System.Drawing.Point(228, 78);
+            this.lblWorth.Location = new System.Drawing.Point(41, 81);
             this.lblWorth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWorth.Name = "lblWorth";
-            this.lblWorth.Size = new System.Drawing.Size(52, 13);
+            this.lblWorth.Size = new System.Drawing.Size(30, 13);
             this.lblWorth.TabIndex = 9;
-            this.lblWorth.Text = "WORTH:";
+            this.lblWorth.Text = "MIN:";
+            this.lblWorth.Click += new System.EventHandler(this.lblWorth_Click);
             // 
-            // cbConfirm
+            // txtMin
             // 
-            this.cbConfirm.AutoSize = true;
-            this.cbConfirm.Location = new System.Drawing.Point(121, 58);
-            this.cbConfirm.Margin = new System.Windows.Forms.Padding(2);
-            this.cbConfirm.Name = "cbConfirm";
-            this.cbConfirm.Size = new System.Drawing.Size(15, 14);
-            this.cbConfirm.TabIndex = 8;
-            this.cbConfirm.UseVisualStyleBackColor = true;
-            // 
-            // lblNewType
-            // 
-            this.lblNewType.AutoSize = true;
-            this.lblNewType.Location = new System.Drawing.Point(54, 58);
-            this.lblNewType.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblNewType.Name = "lblNewType";
-            this.lblNewType.Size = new System.Drawing.Size(67, 13);
-            this.lblNewType.TabIndex = 7;
-            this.lblNewType.Text = "NEW TYPE:";
-            // 
-            // txtWorth
-            // 
-            this.txtWorth.Location = new System.Drawing.Point(281, 75);
-            this.txtWorth.Margin = new System.Windows.Forms.Padding(2);
-            this.txtWorth.Name = "txtWorth";
-            this.txtWorth.Size = new System.Drawing.Size(86, 20);
-            this.txtWorth.TabIndex = 6;
+            this.txtMin.Location = new System.Drawing.Point(75, 78);
+            this.txtMin.Margin = new System.Windows.Forms.Padding(2);
+            this.txtMin.Name = "txtMin";
+            this.txtMin.Size = new System.Drawing.Size(109, 20);
+            this.txtMin.TabIndex = 6;
             // 
             // txtTypeName
             // 
-            this.txtTypeName.Location = new System.Drawing.Point(76, 75);
+            this.txtTypeName.Location = new System.Drawing.Point(138, 54);
             this.txtTypeName.Margin = new System.Windows.Forms.Padding(2);
             this.txtTypeName.Name = "txtTypeName";
-            this.txtTypeName.Size = new System.Drawing.Size(148, 20);
+            this.txtTypeName.Size = new System.Drawing.Size(229, 20);
             this.txtTypeName.TabIndex = 5;
-            // 
-            // txtNewType
-            // 
-            this.txtNewType.Enabled = false;
-            this.txtNewType.Location = new System.Drawing.Point(138, 56);
-            this.txtNewType.Margin = new System.Windows.Forms.Padding(2);
-            this.txtNewType.Name = "txtNewType";
-            this.txtNewType.Size = new System.Drawing.Size(229, 20);
-            this.txtNewType.TabIndex = 4;
             // 
             // lblDI
             // 
@@ -399,28 +368,23 @@ namespace NWU_Pointsch_System
             this.cbDI.TabIndex = 2;
             this.cbDI.Text = "SELECT A D/I";
             // 
-            // lblType
+            // label2
             // 
-            this.lblType.AutoSize = true;
-            this.lblType.Location = new System.Drawing.Point(98, 37);
-            this.lblType.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(38, 13);
-            this.lblType.TabIndex = 1;
-            this.lblType.Text = "TYPE:";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(207, 81);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(33, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "MAX:";
             // 
-            // cbTpe
+            // txtMax
             // 
-            this.cbTpe.FormattingEnabled = true;
-            this.cbTpe.Items.AddRange(new object[] {
-            "INFRACTION",
-            "DISCIPLINE"});
-            this.cbTpe.Location = new System.Drawing.Point(138, 36);
-            this.cbTpe.Margin = new System.Windows.Forms.Padding(2);
-            this.cbTpe.Name = "cbTpe";
-            this.cbTpe.Size = new System.Drawing.Size(229, 21);
-            this.cbTpe.TabIndex = 0;
-            this.cbTpe.Text = "SELECT A TYPE";
+            this.txtMax.Location = new System.Drawing.Point(244, 78);
+            this.txtMax.Margin = new System.Windows.Forms.Padding(2);
+            this.txtMax.Name = "txtMax";
+            this.txtMax.Size = new System.Drawing.Size(123, 20);
+            this.txtMax.TabIndex = 14;
             // 
             // frmDBEdit
             // 
@@ -458,17 +422,12 @@ namespace NWU_Pointsch_System
         private System.Windows.Forms.GroupBox gbPointschInformation;
         private System.Windows.Forms.Label lblDI;
         private System.Windows.Forms.ComboBox cbDI;
-        private System.Windows.Forms.Label lblType;
-        private System.Windows.Forms.ComboBox cbTpe;
         private System.Windows.Forms.Button btnPIRemove;
         private System.Windows.Forms.Button btnPIAdd;
         private System.Windows.Forms.Label lblTypeName;
         private System.Windows.Forms.Label lblWorth;
-        private System.Windows.Forms.CheckBox cbConfirm;
-        private System.Windows.Forms.Label lblNewType;
-        private System.Windows.Forms.TextBox txtWorth;
+        private System.Windows.Forms.TextBox txtMin;
         private System.Windows.Forms.TextBox txtTypeName;
-        private System.Windows.Forms.TextBox txtNewType;
         private System.Windows.Forms.Label lblID;
         private System.Windows.Forms.Label lblSNo;
         private System.Windows.Forms.Label lblSurname;
@@ -482,6 +441,8 @@ namespace NWU_Pointsch_System
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbPosition;
         private System.Windows.Forms.Label lblCampus;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbCampus;
+        private System.Windows.Forms.TextBox txtMax;
+        private System.Windows.Forms.Label label2;
     }
 }
