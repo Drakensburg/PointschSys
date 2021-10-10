@@ -80,9 +80,13 @@ namespace NWU_Pointsch_System
 
         private void frmStadmin_Load(object sender, EventArgs e)
         {
+            int SUM1;
+            int SUM2;
+            string sNum = lblSnoPhys.Text;
+            string path;
             try 
             {
-                string path;
+                
                 
                 if (btnEditDB.Visible == true)
                 {
@@ -100,84 +104,155 @@ namespace NWU_Pointsch_System
                 picbSoSA.Visible = false;
             }
 
-            string sNum = lblSnoPhys.Text;
-            sql = "SELECT SUM(dt.Discipline_Pointsch) As Points, s.Staff_ID, s.Staff_Name " +
-                "FROM Staff s LEFT JOIN Discipline d on d.Staff_NWU_ID = s.Staff_ID LEFT JOIN Discipline_Type dt on dt.Discipline_Type_Code = d.Discipline_Type_Code " +
-                "WHERE s.Staff_ID = @StaffNumber GROUP BY s.Staff_ID, s.Staff_Name"; //get the acumilated Discipline pointsch
+            try
+            {
+                sql = "SELECT SUM(Discipline_Pointsch) AS POINTS FROM Discipline WHERE Staff_NWU_ID = @StudentNumber"; //get the accumulate Discipline pointsch
 
+                conn = new SqlConnection(conStr);
+                conn.Open();
+                comm = new SqlCommand(sql, conn);
+                comm.Parameters.AddWithValue("@StudentNumber", sNum);
+                adap = new SqlDataAdapter(comm);
+                ds = new DataSet();
+                adap.Fill(ds);
+                SUM1 = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
+                conn.Close();
 
-            conn = new SqlConnection(conStr);
-            comm = new SqlCommand(sql);
-            comm.Parameters.AddWithValue("@StaffNumber", sNum);
-            conn.Open();
-            adap = new SqlDataAdapter(comm);
-            ds = new DataSet();
-            adap.Fill(ds);
-            int SUM1 = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
-            conn.Close();
+                lblPos.Text = SUM1.ToString(); //Discipline total
+            }
+            catch(Exception)
+            {
+                SUM1 = 0;
+            }
+            
 
-            lblDiscipline.Text = SUM1.ToString(); //Discipline total
+            try
+            {
+                sql = "SELECT SUM(Infraction_Pointsch) AS POINTS FROM Infraction WHERE Staff_NWU_ID = @StudentNumber"; //get the accumulate Infraction pointsch
 
+                conn = new SqlConnection(conStr);
+                conn.Open();
+                comm = new SqlCommand(sql, conn);
+                comm.Parameters.AddWithValue("@StudentNumber", sNum);
+                adap = new SqlDataAdapter(comm);
+                ds = new DataSet();
+                adap.Fill(ds);
+                SUM2 = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
+                conn.Close();
 
-            sql = "SELECT SUM(dt.Infraction_Pointsch) As Points, s.Staff_ID, s.Staff_Name " +
-                "FROM Staff s LEFT JOIN Infraction d on d.Staff_NWU_ID = s.Staff_ID LEFT JOIN Infraction_Type dt on dt.Infraction_Type_Code = d.Infraction_Type_Code " +
-                "WHERE s.Staff_ID = @StaffNumber GROUP BY s.Staff_ID, s.Staff_Name"; ////get the acumilated Infraction pointsch
+                lblNeg.Text = SUM2.ToString();//Infraction total
+            }
+            catch(Exception)
+            {
+                SUM2 = 0;
+            }
+            
 
-
-            conn = new SqlConnection(conStr);
-            comm = new SqlCommand(sql);
-            comm.Parameters.AddWithValue("@StaffNumber", sNum);
-            conn.Open();
-            adap = new SqlDataAdapter(comm);
-            ds = new DataSet();
-            adap.Fill(ds);
-            int SUM2 = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
-            conn.Close();
-
-            lblInfraction.Text = SUM2.ToString();//Infraction total
 
             if (SUM1 > SUM2)//Total pointsch
             {
-                lblTotal.Text = (SUM1 - SUM2).ToString();
-                lblTotal.ForeColor = Color.Purple;
+                lblSum.Text = (SUM1 - SUM2).ToString();
+                lblSum.ForeColor = Color.Purple;
+                if ((SUM1 - SUM2) > 20)
+                {
+                    try
+                    {
+                        path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\Assets\Karmas\Good.png";
+                        picbStatus.Image = Image.FromFile(@path);
+                    }
+                    catch (Exception Ne)
+                    {
+                        picbStatus.Visible = false;
+                        picbSoSA.Visible = false;
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\Assets\Karmas\Neutral.png";
+                        picbStatus.Image = Image.FromFile(@path);
+                    }
+                    catch (Exception Ne)
+                    {
+                        picbStatus.Visible = false;
+                        picbSoSA.Visible = false;
+                    }
+                }
             }
             else
             {
-                lblTotal.Text = (SUM2 - SUM1).ToString();
-                lblTotal.ForeColor = Color.DarkRed;
+                lblSum.Text = (SUM2 - SUM1).ToString();
+                lblSum.ForeColor = Color.DarkRed;
+                if ((SUM2 - SUM1) > 20)
+                {
+                    try
+                    {
+                        path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\Assets\Karmas\Bad.png";
+                        picbStatus.Image = Image.FromFile(@path);
+                    }
+                    catch (Exception Ne)
+                    {
+                        picbStatus.Visible = false;
+                        picbSoSA.Visible = false;
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + @"\Assets\Karmas\Neutral.png";
+                        picbStatus.Image = Image.FromFile(@path);
+                    }
+                    catch (Exception Ne)
+                    {
+                        picbStatus.Visible = false;
+                        picbSoSA.Visible = false;
+                    }
+                }
             }
 
-            sql = "SELECT Infraction_Date, Infraction_Discription, Infraction_Pointsch FROM Infraction WHERE (Staff_NWU_ID = @StaffNumber)"; //make a list of Infractions
+            sql = "SELECT Infraction_Date, Infraction_Description, Infraction_Pointsch FROM Infraction WHERE (Staff_NWU_ID = @StudentNumber)"; //make a lis of Infractions
 
             conn = new SqlConnection(conStr);
-            comm = new SqlCommand(sql);
-            comm.Parameters.AddWithValue("@StaffNumber", sNum);
             conn.Open();
+            comm = new SqlCommand(sql, conn);
+            comm.Parameters.AddWithValue("@StudentNumber", sNum);
             adap = new SqlDataAdapter(comm);
             reader = comm.ExecuteReader();
 
             while (reader.Read())
             {
-                string output = reader.GetValue(0) + "\n" + reader.GetValue(1) + "\n" + reader.GetValue(2) + "\n\n";
-                lblInfraction.Text = (output);
+                string output = "Date: " + reader.GetValue(0);
+                lbInfraction.Items.Add(output);
+                output = "Description: " + reader.GetValue(1);
+                lbInfraction.Items.Add(output);
+                output = "Pointsch: " + reader.GetValue(2);
+                lbInfraction.Items.Add(output);
+                lbInfraction.Items.Add("\n");
             }
 
             conn.Close();
 
 
-            sql = "SELECT Discipline_Date, Discipline_Discription, Discipline_Pointsch FROM Discipline WHERE (Staff_NWU_ID = @StaffNumber)"; //make a list of Discipline's
+            sql = "SELECT Discipline_Date, Discipline_Description, Discipline_Pointsch FROM Discipline WHERE (Staff_NWU_ID = @StudentNumber)"; //make a list of Discipline's
 
             conn = new SqlConnection(conStr);
-            comm = new SqlCommand(sql);
-            comm.Parameters.AddWithValue("@StaffNumber", sNum);
             conn.Open();
+            comm = new SqlCommand(sql, conn);
+            comm.Parameters.AddWithValue("@StudentNumber", sNum);
             adap = new SqlDataAdapter(comm);
             reader = comm.ExecuteReader();
 
             while (reader.Read())
             {
-                string output = reader.GetValue(0) + "\n" + reader.GetValue(1) + "\n" + reader.GetValue(2) + "\n\n";
-                lblInfraction.Text = (output);
+                string output = "Date: " + reader.GetValue(0);
+                lbDiscipline.Items.Add(output);
+                output = "Description: " + reader.GetValue(1);
+                lbDiscipline.Items.Add(output);
+                output = "Pointsch: " + reader.GetValue(2);
+                lbDiscipline.Items.Add(output);
+                lbDiscipline.Items.Add("\n");
             }
 
             conn.Close();
