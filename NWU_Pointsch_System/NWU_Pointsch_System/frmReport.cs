@@ -73,8 +73,8 @@ namespace NWU_Pointsch_System
             if (sort == "ASC")
             {
                 sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                   "FROM Discipline " +
-                   "ORDER BY Discipline_Type_Code ASC";
+                       "FROM Discipline " +
+                       "ORDER BY Discipline_Type_Code ASC";
 
                 comm = new SqlCommand(sqlD, conn);
                 reader = comm.ExecuteReader();
@@ -103,8 +103,8 @@ namespace NWU_Pointsch_System
             else if(sort == "DESC")
             {
                 sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                   "FROM Discipline " +
-                   "ORDER BY Discipline_Type_Code DESC";
+                       "FROM Discipline " +
+                       "ORDER BY Discipline_Type_Code DESC";
 
                 comm = new SqlCommand(sqlD, conn);
                 reader = comm.ExecuteReader();
@@ -138,8 +138,8 @@ namespace NWU_Pointsch_System
             if (sort == "ASC")
             {
                 sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                   "FROM Infraction " +
-                   "ORDER BY Infraction_Type_Code ASC";
+                       "FROM Infraction " +
+                       "ORDER BY Infraction_Type_Code ASC";
 
                 comm = new SqlCommand(sqlI, conn);
                 reader = comm.ExecuteReader();
@@ -169,8 +169,8 @@ namespace NWU_Pointsch_System
             else if (sort == "DESC")
             {
                 sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                   "FROM Infraction " +
-                   "ORDER BY Infraction_Type_Code DESC";
+                       "FROM Infraction " +
+                       "ORDER BY Infraction_Type_Code DESC";
 
                 comm = new SqlCommand(sqlI, conn);
                 reader = comm.ExecuteReader();
@@ -205,21 +205,21 @@ namespace NWU_Pointsch_System
             conn = new SqlConnection(constr);
             conn.Open();
 
-            lstReport.Items.Clear();
+            lstReport.Items.Clear();//Clear the listbox
             string month = "%/Oct/%";
             string output;
             string campus = "Potchefstroom";
 
-            if (cmbMonth.SelectedIndex.ToString() != null && cmbCampus.SelectedIndex.ToString() != null)
+            if (cmbMonth.SelectedIndex.ToString() != null && cmbCampus.SelectedIndex.ToString() != null)//If both comboboxes are empty
             {
                 FormatOutput();
                 LoadDiscipline();
                 LoadInfraction();
             }
-            else if(cmbMonth.SelectedIndex.ToString() != null)
+            else if(cmbMonth.SelectedIndex.ToString() != null)//If the Combobox for the campus filter is empty
             {
                 FormatOutput();
-                switch (cmbMonth.SelectedIndex)
+                switch (cmbMonth.SelectedIndex)//Switch to determine the month
                 {
                     case 0:
                         month = "%Jan%";
@@ -261,31 +261,31 @@ namespace NWU_Pointsch_System
 
                 
 
-                if (action == "Both")
+                if (action == "Both")//Displays both action types
                 {
-                    if(sort == "ASC")
+                    if(sort == "ASC")//Sorting the values in ascending order
                     {
                         sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                           "FROM Discipline " +
-                           "WHERE Discipline_Date = @month " +
-                           "ORDER BY Discipline_Type_Code ASC";
+                               "FROM Discipline " +
+                               "WHERE Discipline_Date = @month " +
+                               "ORDER BY Discipline_Type_Code ASC";
 
                         sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                           "FROM Infraction " +
-                           "WHERE Infraction_Date = @month " +
-                           "ORDER BY Infraction_Type_Code ASC";
+                               "FROM Infraction " +
+                               "WHERE Infraction_Date = @month " +
+                               "ORDER BY Infraction_Type_Code ASC";
                     }
-                    else if(sort == "DESC")
+                    else if(sort == "DESC")//Sorting the values in descending order
                     {
                         sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                           "FROM Discipline " +
-                           "WHERE Discipline_Date = @month " +
-                           "ORDER BY Discipline_Type_Code DESC";
+                               "FROM Discipline " +
+                               "WHERE Discipline_Date = @month " +
+                               "ORDER BY Discipline_Type_Code DESC";
 
                         sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                           "FROM Infraction " +
-                           "WHERE Infraction_Date = @month " +
-                           "ORDER BY Infraction_Type_Code DESC";
+                               "FROM Infraction " +
+                               "WHERE Infraction_Date = @month " +
+                               "ORDER BY Infraction_Type_Code DESC";
                     }
                     
 
@@ -293,6 +293,7 @@ namespace NWU_Pointsch_System
                     comm.Parameters.AddWithValue("@month", month);
                     reader = comm.ExecuteReader();
 
+                    /* Adding the values to the listbox */
                     while (reader.Read())
                     {
                         output = reader.GetString(0) + reader.GetValue(1).ToString();
@@ -310,6 +311,7 @@ namespace NWU_Pointsch_System
                     comm.Parameters.AddWithValue("@month", month);
                     reader = comm.ExecuteReader();
 
+                    /* Adding the values to the listbox */
                     while (reader.Read())
                     {
                         output = reader.GetString(0) + reader.GetValue(1).ToString();
@@ -319,21 +321,21 @@ namespace NWU_Pointsch_System
 
                     reader.Close();
                 }
-                else if (action == "Discipline")
+                else if (action == "Discipline")//Displays only the discipline action types
                 {
-                    if (sort == "ASC")
+                    if (sort == "ASC")//Sorting the values in ascending order
                     {
                         sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                           "FROM Discipline " +
-                           "WHERE Discipline_Date = @month" +
-                           "ORDER BY Discipline_Type_Code ASC";
+                               "FROM Discipline " +
+                               "WHERE Discipline_Date = @month" +
+                               "ORDER BY Discipline_Type_Code ASC";
                     }
-                    else if (sort == "DESC")
+                    else if (sort == "DESC")//Sorting the values in descending order
                     {
                         sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                           "FROM Discipline " +
-                           "WHERE Discipline_Date = @month" +
-                           "ORDER BY Discipline_Type_Code DESC";
+                               "FROM Discipline " +
+                               "WHERE Discipline_Date = @month" +
+                               "ORDER BY Discipline_Type_Code DESC";
                     }
 
                     
@@ -342,6 +344,7 @@ namespace NWU_Pointsch_System
                     comm.Parameters.AddWithValue("@month", month);
                     reader = comm.ExecuteReader();
 
+                    /* Adding the values to the listbox */
                     while (reader.Read())
                     {
                         output = reader.GetString(0) + reader.GetValue(1).ToString();
@@ -351,21 +354,21 @@ namespace NWU_Pointsch_System
 
                     reader.Close();
                 }
-                else if (action == "Infraction")
+                else if (action == "Infraction")//Displays only the infraction action types
                 {
-                    if (sort == "ASC")
+                    if (sort == "ASC")//Sorting the values in ascending order
                     {
                         sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                           "FROM Infraction " +
-                           "WHERE Infraction_Date = @month" +
-                           "ORDER BY Infraction_Type_Code ASC";
+                               "FROM Infraction " +
+                               "WHERE Infraction_Date = @month" +
+                               "ORDER BY Infraction_Type_Code ASC";
                     }
-                    else if (sort == "DESC")
+                    else if (sort == "DESC")//Sorting the values in descending order
                     {
                         sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                           "FROM Infraction " +
-                           "WHERE Infraction_Date = @month" +
-                           "ORDER BY Infraction_Type_Code DESC";
+                               "FROM Infraction " +
+                               "WHERE Infraction_Date = @month" +
+                               "ORDER BY Infraction_Type_Code DESC";
                     }
 
                                              
@@ -374,6 +377,7 @@ namespace NWU_Pointsch_System
                     comm.Parameters.AddWithValue("@month", month);
                     reader = comm.ExecuteReader();
 
+                    /* Adding the values to the listbox */
                     while (reader.Read())
                     {
                         output = reader.GetString(0) + reader.GetValue(1).ToString();
@@ -389,7 +393,7 @@ namespace NWU_Pointsch_System
             else if (cmbCampus.SelectedIndex.ToString() != null)
             {
                 FormatOutput();
-                switch (cmbCampus.SelectedIndex)
+                switch (cmbCampus.SelectedIndex)//Switch to determine the campus
                 {
                     case 0:
                         campus = "Potchefstroom";
@@ -402,31 +406,35 @@ namespace NWU_Pointsch_System
                         break;
                 }
 
-                if(action == "Both")
+                if(action == "Both")//Displays both action types
                 {
-                    if (sort == "ASC")
+                    if (sort == "ASC")//Sorting the values in ascending order
                     {
-                        sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                           "FROM Discipline LEFT JOIN Staff ON Discipline.Staff_NWU_ID = Staff.Staff_NWU_ID" +
-                           "WHERE Staff.Campus_Name = @campus" +
-                           "ORDER BY Discipline.Discipline_Type_Code ASC";
+                        sqlD = "SELECT DISTINCT Discipline_Type.Discipline_Type as Type, SUM(Discipline_Pointsch) AS Discipline_Total " +
+                               "FROM Discipline LEFT JOIN Staff ON Discipline.Staff_NWU_ID = Staff.Staff_NWU_ID Left join Discipline_type ON Discipline_type.Discipline_Type_Code = Discipline.Discipline_Type_Code " +
+                               "WHERE Staff.Campus_Name = @campus " +
+                               "GROUP BY discipline_Type.Discipline_Type " +
+                               "ORDER BY Discipline_Type.Discipline_Type ASC";
 
-                        sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                           "FROM Infraction LEFT JOIN Staff ON Infraction.Staff_NWU_ID = Staff.Staff_NWU_ID" +
-                           "WHERE Staff.Campus_Name = @campus" +
-                           "ORDER BY Infraction.Infraction_Type_Code ASC";
+                        sqlI = "SELECT DISTINCT Infraction_Type.Infraction_Type as Type, SUM(Infraction_Pointsch) AS Infraction_Total " +
+                               "FROM Infraction LEFT JOIN Staff ON Infraction.Staff_NWU_ID = Staff.Staff_NWU_ID Left join Infraction_type ON Infraction_type.Infraction_Type_Code = Infraction.Infraction_Type_Code " +
+                               "WHERE Staff.Campus_Name = @campus " +
+                               "GROUP BY Infraction_Type.Infraction_Type " +
+                               "ORDER BY Infraction_Type.Infraction_Type ASC";
                     }
-                    else if (sort == "DESC")
+                    else if (sort == "DESC")//Sorting the values in descending order
                     {
-                        sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                           "FROM Discipline LEFT JOIN Staff ON Discipline.Staff_NWU_ID = Staff.Staff_NWU_ID" +
-                           "WHERE Staff.Campus_Name = @campus" +
-                           "ORDER BY Discipline.Discipline_Type_Code DESC";
+                        sqlD = "SELECT DISTINCT discipline_Type.Discipline_Type as Type, SUM(Discipline_Pointsch) AS Discipline_Total " +
+                               "FROM Discipline LEFT JOIN Staff ON Discipline.Staff_NWU_ID = Staff.Staff_NWU_ID Left join Discipline_type ON Discipline_type.Discipline_Type_Code = Discipline.Discipline_Type_Code " +
+                               "WHERE Staff.Campus_Name = @campus " +
+                               "GROUP BY discipline_Type.Discipline_Type " +
+                               "ORDER BY Discipline_Type.Discipline_Type DESC";
 
-                        sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                           "FROM Infraction LEFT JOIN Staff ON Infraction.Staff_NWU_ID = Staff.Staff_NWU_ID" +
-                           "WHERE Staff.Campus_Name = @campus" +
-                           "ORDER BY Infraction.Infraction_Type_Code DESC";
+                        sqlI = "SELECT DISTINCT Infraction_Type.Infraction_Type_Code as Type, SUM(Infraction_Pointsch) AS Infraction_Total " +
+                               "FROM Infraction LEFT JOIN Staff ON Infraction.Staff_NWU_ID = Staff.Staff_NWU_ID Left join Infraction_type ON Infraction_type.Infraction_Type_Code = Infraction.Infraction_Type_Code " +
+                               "WHERE Staff.Campus_Name = @campus " +
+                               "GROUP BY Infraction_Type.Infraction_Type " +
+                               "ORDER BY Infraction_Type.Infraction_Type DESC";
                     }
 
                     
@@ -435,6 +443,7 @@ namespace NWU_Pointsch_System
                     comm.Parameters.AddWithValue("@campus", campus);
                     reader = comm.ExecuteReader();
 
+                    /* Adding the values to the listbox */
                     while (reader.Read())
                     {
                         output = reader.GetString(0) + reader.GetValue(1).ToString();
@@ -452,6 +461,7 @@ namespace NWU_Pointsch_System
                     comm.Parameters.AddWithValue("@campus", campus);
                     reader = comm.ExecuteReader();
 
+                    /* Adding the values to the listbox */
                     while (reader.Read())
                     {
                         output = reader.GetString(0) + reader.GetValue(1).ToString();
@@ -461,21 +471,23 @@ namespace NWU_Pointsch_System
 
                     reader.Close();
                 }
-                else if(action == "Discipline")
+                else if(action == "Discipline")//Displays only the discipline action types
                 {
-                    if (sort == "ASC")
+                    if (sort == "ASC")//Sorting the values in ascending order
                     {
-                        sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                           "FROM Discipline LEFT JOIN Staff ON Discipline.Staff_NWU_ID = Staff.Staff_NWU_ID" +
-                           "WHERE Staff.Campus_Name = @campus" +
-                           "ORDER BY Discipline.Discipline_Type_Code ASC";
+                        sqlD = "SELECT DISTINCT discipline_Type.Discipline_Type as Type, SUM(Discipline_Pointsch) AS Discipline_Total " +
+                               "FROM Discipline LEFT JOIN Staff ON Discipline.Staff_NWU_ID = Staff.Staff_NWU_ID Left join Discipline_type ON Discipline_type.Discipline_Type_Code = Discipline.Discipline_Type_Code " +
+                               "WHERE Staff.Campus_Name = @campus " +
+                               "GROUP BY discipline_Type.Discipline_Type " +
+                               "ORDER BY Discipline_Type.Discipline_Type ASC";
                     }
-                    else if (sort == "DESC")
+                    else if (sort == "DESC")//Sorting the values in descending order
                     {
-                        sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                           "FROM Discipline LEFT JOIN Staff ON Discipline.Staff_NWU_ID = Staff.Staff_NWU_ID" +
-                           "WHERE Staff.Campus_Name = @campus" +
-                           "ORDER BY Discipline.Discipline_Type_Code DESC";
+                        sqlD = "SELECT DISTINCT discipline_Type.Discipline_Type as Type, SUM(Discipline_Pointsch) AS Discipline_Total " +
+                               "FROM Discipline LEFT JOIN Staff ON Discipline.Staff_NWU_ID = Staff.Staff_NWU_ID Left join Discipline_type ON Discipline_type.Discipline_Type_Code = Discipline.Discipline_Type_Code " +
+                               "WHERE Staff.Campus_Name = @campus " +
+                               "GROUP BY discipline_Type.Discipline_Type " +
+                               "ORDER BY Discipline_Type.Discipline_Type DESC";
                     }
 
                     
@@ -484,6 +496,7 @@ namespace NWU_Pointsch_System
                     comm.Parameters.AddWithValue("@campus", campus);
                     reader = comm.ExecuteReader();
 
+                    /* Adding the values to the listbox */
                     while (reader.Read())
                     {
                         output = reader.GetString(0) + reader.GetValue(1).ToString();
@@ -493,27 +506,30 @@ namespace NWU_Pointsch_System
 
                     reader.Close();
                 }
-                else if(action == "Infraction")
+                else if(action == "Infraction")//Displays only the infraction action types
                 {
-                    if (sort == "ASC")
+                    if (sort == "ASC")//Sorting the values in ascending order
                     {
-                        sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                           "FROM Infraction LEFT JOIN Staff ON Infraction.Staff_NWU_ID = Staff.Staff_NWU_ID" +
-                           "WHERE Staff.Campus_Name = @campus" +
-                           "ORDER BY Infraction.Infraction_Type_Code ASC";
+                        sqlI = "SELECT DISTINCT Infraction_Type.Infraction_Type as Type, SUM(Infraction_Pointsch) AS Infraction_Total " +
+                               "FROM Infraction LEFT JOIN Staff ON Infraction.Staff_NWU_ID = Staff.Staff_NWU_ID Left join Infraction_type ON Infraction_type.Infraction_Type_Code = Infraction.Infraction_Type_Code " +
+                               "WHERE Staff.Campus_Name = @campus " +
+                               "GROUP BY Infraction_Type.Infraction_Type " +
+                               "ORDER BY Infraction_Type.Infraction_Type ASC";
                     }
-                    else if (sort == "DESC")
+                    else if (sort == "DESC")//Sorting the values in descending order
                     {
-                        sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                           "FROM Infraction LEFT JOIN Staff ON Infraction.Staff_NWU_ID = Staff.Staff_NWU_ID" +
-                           "WHERE Staff.Campus_Name = @campus" +
-                           "ORDER BY Infraction.Infraction_Type_Code DESC";
+                        sqlI = "SELECT DISTINCT Infraction_Type.Infraction_Type as Type, SUM(Infraction_Pointsch) AS Infraction_Total " +
+                               "FROM Infraction LEFT JOIN Staff ON Infraction.Staff_NWU_ID = Staff.Staff_NWU_ID Left join Infraction_type ON Infraction_type.Infraction_Type_Code = Infraction.Infraction_Type_Code " +
+                               "WHERE Staff.Campus_Name = @campus " +
+                               "GROUP BY Infraction_Type.Infraction_Type " +
+                               "ORDER BY Infraction_Type.Infraction_Type DESC";
                     }
                                         
                     comm = new SqlCommand(sqlI, conn);
                     comm.Parameters.AddWithValue("@campus", campus);
                     reader = comm.ExecuteReader();
 
+                    /* Adding the values to the listbox */
                     while (reader.Read())
                     {
                         output = reader.GetString(0) + reader.GetValue(1).ToString();
@@ -529,7 +545,7 @@ namespace NWU_Pointsch_System
             else
             {
                 FormatOutput();
-                switch (cmbMonth.SelectedIndex)
+                switch (cmbMonth.SelectedIndex)//Switch to determine the month
                 {
                     case 0:
                         month = "%Jan%";
@@ -569,7 +585,7 @@ namespace NWU_Pointsch_System
                         break;
                 }
 
-                switch (cmbCampus.SelectedIndex)
+                switch (cmbCampus.SelectedIndex)//Switch to determine the campus
                 {
                     case 0:
                         campus = "Potchefstroom";
@@ -582,31 +598,35 @@ namespace NWU_Pointsch_System
                         break;
                 }
 
-                if (action == "Both")
+                if (action == "Both")//Displays both action types
                 {
-                    if (sort == "ASC")
+                    if (sort == "ASC")//Sorting the values in ascending order
                     {
-                        sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                           "FROM Discipline LEFT JOIN Staff ON Discipline.Staff_NWU_ID = Staff.Staff_NWU_ID" +
-                           "WHERE Discipline.Discipline_Date = @month AND Staff.Campus_Name = @campus" +
-                           "ORDER BY Discipline.Discipline_Type_Code ASC";
+                        sqlD = "SELECT DISTINCT discipline_Type.Discipline_Type as Type, SUM(Discipline_Pointsch) AS Discipline_Total " +
+                               "FROM Discipline LEFT JOIN Staff ON Discipline.Staff_NWU_ID = Staff.Staff_NWU_ID Left join Discipline_type ON Discipline_type.Discipline_Type_Code = Discipline.Discipline_Type_Code " +
+                               "WHERE Discipline.Discipline_Date = @month AND Staff.Campus_Name = @campus " +
+                               "GROUP BY Discipline_Type.Discipline_Type " +
+                               "ORDER BY Discipline_Type.Discipline_Type ASC";
 
-                        sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                           "FROM Infraction LEFT JOIN Staff ON Infraction.Staff_NWU_ID = Staff.Staff_NWU_ID" +
-                           "WHERE Infraction.Infraction_Date = @month AND Staff.Campus_Name = @campus" +
-                           "ORDER BY Infraction.Infraction_Type_Code ASC";
+                        sqlI = "SELECT DISTINCT Infraction_Type.Infraction_Type as Type, SUM(Infraction_Pointsch) AS Infraction_Total " +
+                               "FROM Infraction LEFT JOIN Staff ON Infraction.Staff_NWU_ID = Staff.Staff_NWU_ID Left join Infraction_type ON Infraction_type.Infraction_Type_Code = Infraction.Infraction_Type_Code " +
+                               "WHERE Infraction.Infraction_Date = @month AND Staff.Campus_Name = @campus " +
+                               "GROUP BY Infraction_Type.Infraction_Type " +
+                               "ORDER BY Infraction_Type.Infraction_Type ASC";
                     }
-                    else if (sort == "DESC")
+                    else if (sort == "DESC")//Sorting the values in descending order
                     {
-                        sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                           "FROM Discipline LEFT JOIN Staff ON Discipline.Staff_NWU_ID = Staff.Staff_NWU_ID" +
-                           "WHERE Discipline.Discipline_Date = @month AND Staff.Campus_Name = @campus" +
-                           "ORDER BY Discipline.Discipline_Type_Code DESC";
+                        sqlD = "SELECT DISTINCT discipline_Type.Discipline_Type as Type, SUM(Discipline_Pointsch) AS Discipline_Total " +
+                               "FROM Discipline LEFT JOIN Staff ON Discipline.Staff_NWU_ID = Staff.Staff_NWU_ID Left join Discipline_type ON Discipline_type.Discipline_Type_Code = Discipline.Discipline_Type_Code " +
+                               "WHERE Discipline.Discipline_Date = @month AND Staff.Campus_Name = @campus " +
+                               "GROUP BY Discipline_Type.Discipline_Type " +
+                               "ORDER BY Discipline_Type.Discipline_Type DESC";
 
-                        sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                           "FROM Infraction LEFT JOIN Staff ON Infraction.Staff_NWU_ID = Staff.Staff_NWU_ID" +
-                           "WHERE Infraction.Infraction_Date = @month AND Staff.Campus_Name = @campus" +
-                           "ORDER BY Infraction.Infraction_Type_Code DESC";
+                        sqlI = "SELECT DISTINCT Infraction_Type.Infraction_Type as Type, SUM(Infraction_Pointsch) AS Infraction_Total " +
+                               "FROM Infraction LEFT JOIN Staff ON Infraction.Staff_NWU_ID = Staff.Staff_NWU_ID Left join Infraction_type ON Infraction_type.Infraction_Type_Code = Infraction.Infraction_Type_Code " +
+                               "WHERE Infraction.Infraction_Date = @month AND Staff.Campus_Name = @campus " +
+                               "GROUP BY Infraction_Type.Infraction_Type " +
+                               "ORDER BY Infraction_Type.Infraction_Type DESC";
                     }
 
                     
@@ -616,6 +636,7 @@ namespace NWU_Pointsch_System
                     comm.Parameters.AddWithValue("@campus", campus);
                     reader = comm.ExecuteReader();
 
+                    /* Adding the values to the listbox */
                     while (reader.Read())
                     {
                         output = reader.GetString(0) + reader.GetValue(1).ToString();
@@ -634,6 +655,7 @@ namespace NWU_Pointsch_System
                     comm.Parameters.AddWithValue("@campus", campus);
                     reader = comm.ExecuteReader();
 
+                    /* Adding the values to the listbox */
                     while (reader.Read())
                     {
                         output = reader.GetString(0) + reader.GetValue(1).ToString();
@@ -643,21 +665,23 @@ namespace NWU_Pointsch_System
 
                     reader.Close();
                 }
-                else if (action == "Discipline")
+                else if (action == "Discipline")//Displays only the discipline action types
                 {
-                    if (sort == "ASC")
+                    if (sort == "ASC")//Sorting the values in ascending order
                     {
-                        sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                           "FROM Discipline LEFT JOIN Staff ON Discipline.Staff_NWU_ID = Staff.Staff_NWU_ID" +
-                           "WHERE Discipline.Discipline_Date = @month AND Staff.Campus_Name = @campus" +
-                           "ORDER BY Discipline.Discipline_Type_Code ASC";
+                        sqlD = "SELECT DISTINCT discipline_Type.Discipline_Type as Type, SUM(Discipline_Pointsch) AS Discipline_Total " +
+                               "FROM Discipline LEFT JOIN Staff ON Discipline.Staff_NWU_ID = Staff.Staff_NWU_ID Left join Discipline_type ON Discipline_type.Discipline_Type_Code = Discipline.Discipline_Type_Code " +
+                               "WHERE Discipline.Discipline_Date = @month AND Staff.Campus_Name = @campus " +
+                               "GROUP BY Discipline_Type.Discipline_Type " +
+                               "ORDER BY Discipline_Type.Discipline_Type ASC";
                     }
-                    else if (sort == "DESC")
+                    else if (sort == "DESC")//Sorting the values in descending order
                     {
-                        sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                           "FROM Discipline LEFT JOIN Staff ON Discipline.Staff_NWU_ID = Staff.Staff_NWU_ID" +
-                           "WHERE Discipline.Discipline_Date = @month AND Staff.Campus_Name = @campus" +
-                           "ORDER BY Discipline.Discipline_Type_Code DESC";
+                        sqlD = "SELECT DISTINCT discipline_Type.Discipline_Type as Type, SUM(Discipline_Pointsch) AS Discipline_Total " +
+                               "FROM Discipline LEFT JOIN Staff ON Discipline.Staff_NWU_ID = Staff.Staff_NWU_ID Left join Discipline_type ON Discipline_type.Discipline_Type_Code = Discipline.Discipline_Type_Code " +
+                               "WHERE Discipline.Discipline_Date = @month AND Staff.Campus_Name = @campus " +
+                               "GROUP BY Discipline_Type.Discipline_Type " +
+                               "ORDER BY Discipline_Type.Discipline_Type DESC";
                     }
 
                     
@@ -667,6 +691,7 @@ namespace NWU_Pointsch_System
                     comm.Parameters.AddWithValue("@campus", campus);
                     reader = comm.ExecuteReader();
 
+                    /* Adding the values to the listbox */
                     while (reader.Read())
                     {
                         output = reader.GetString(0) + reader.GetValue(1).ToString();
@@ -676,21 +701,23 @@ namespace NWU_Pointsch_System
 
                     reader.Close();
                 }
-                else if (action == "Infraction")
+                else if (action == "Infraction")//Displays only the infraction action types
                 {
-                    if (sort == "ASC")
+                    if (sort == "ASC")//Sorting the values in ascending order
                     {
-                        sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                           "FROM Infraction LEFT JOIN Staff ON Infraction.Staff_NWU_ID = Staff.Staff_NWU_ID" +
-                           "WHERE Infraction.Infraction_Date = @month AND Staff.Campus_Name = @campus" +
-                           "ORDER BY Infraction.Infraction_Type_Code ASC";
+                        sqlI = "SELECT DISTINCT Infraction_Type.Infraction_Type as Type, SUM(Infraction_Pointsch) AS Infraction_Total " +
+                               "FROM Infraction LEFT JOIN Staff ON Infraction.Staff_NWU_ID = Staff.Staff_NWU_ID Left join Infraction_type ON Infraction_type.Infraction_Type_Code = Infraction.Infraction_Type_Code " +
+                               "WHERE Infraction.Infraction_Date = @month AND Staff.Campus_Name = @campus " +
+                               "GROUP BY Infraction_Type.Infraction_Type " +
+                               "ORDER BY Infraction_Type.Infraction_Type ASC";
                     }
-                    else if (sort == "DESC")
+                    else if (sort == "DESC")//Sorting the values in descending order
                     {
-                        sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                           "FROM Infraction LEFT JOIN Staff ON Infraction.Staff_NWU_ID = Staff.Staff_NWU_ID" +
-                           "WHERE Infraction.Infraction_Date = @month AND Staff.Campus_Name = @campus" +
-                           "ORDER BY Infraction.Infraction_Type_Code DESC";
+                        sqlI = "SELECT DISTINCT Infraction_Type.Infraction_Type as Type, SUM(Infraction_Pointsch) AS Infraction_Total " +
+                               "FROM Infraction LEFT JOIN Staff ON Infraction.Staff_NWU_ID = Staff.Staff_NWU_ID Left join Infraction_type ON Infraction_type.Infraction_Type_Code = Infraction.Infraction_Type_Code " +
+                               "WHERE Infraction.Infraction_Date = @month AND Staff.Campus_Name = @campus " +
+                               "GROUP BY Infraction_Type.Infraction_Type " +
+                               "ORDER BY Infraction_Type.Infraction_Type DESC";
                     }
 
                     
@@ -700,6 +727,7 @@ namespace NWU_Pointsch_System
                     comm.Parameters.AddWithValue("@campus", campus);
                     reader = comm.ExecuteReader();
 
+                    /* Adding the values to the listbox */
                     while (reader.Read())
                     {
                         output = reader.GetString(0) + reader.GetValue(1).ToString();
