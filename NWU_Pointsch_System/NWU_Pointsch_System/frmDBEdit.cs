@@ -29,5 +29,10 @@ namespace NWU_Pointsch_System
                 //FORM IS NOT OPEN
             }
         }
+
+        private void frmDBEdit_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
