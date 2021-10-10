@@ -16,11 +16,10 @@ namespace NWU_Pointsch_System
     {
 
         public string StudentNumber, StadminNumber = "";
-        string conStr = @"";
+        string conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\dbPointsch.mdf;Integrated Security=True";
         SqlConnection conn;   //all my public statements
         SqlCommand comm;
         SqlDataAdapter adap;
-        DataSet ds;
         SqlDataReader reader;
         string sql = "";
 
@@ -38,7 +37,7 @@ namespace NWU_Pointsch_System
             }
             catch (NullReferenceException ne)
             {
-                //FORM IS NOT OPEN
+                MessageBox.Show(ne.ToString());
             }
         }
 
@@ -63,11 +62,13 @@ namespace NWU_Pointsch_System
                 sql = "INSERT INTO Discipline_Type(Discipline_Type, Discipline_Pointsch_Min, Discipline_Pointsch_Min) VALUES (@type, @min, @max)";
 
                 conn = new SqlConnection(conStr);
+                conn.Open();
+                comm = new SqlCommand(sql, conn);
+                adap = new SqlDataAdapter();
                 comm.Parameters.AddWithValue("@type", txtTypeName.Text);
                 comm.Parameters.AddWithValue("@min", Int32.Parse(txtMin.Text));
                 comm.Parameters.AddWithValue("@max", Int32.Parse(txtMax.Text));
-                conn.Open();
-                comm = new SqlCommand(sql, conn);
+                
                 adap.InsertCommand = comm;
                 adap.InsertCommand.ExecuteNonQuery();
 
@@ -80,11 +81,13 @@ namespace NWU_Pointsch_System
                 sql = "INSERT INTO Infraction_Type(Infraction_Type, Infraction_Pointsch_Min, Infraction_Pointsch_Min) VALUES (@type, @min, @max)";
 
                 conn = new SqlConnection(conStr);
+                conn.Open();
+                comm = new SqlCommand(sql, conn);
+                adap = new SqlDataAdapter();
                 comm.Parameters.AddWithValue("@type", txtTypeName.Text);
                 comm.Parameters.AddWithValue("@min", Int32.Parse(txtMin.Text));
                 comm.Parameters.AddWithValue("@max", Int32.Parse(txtMax.Text));
-                conn.Open();
-                comm = new SqlCommand(sql, conn);
+                
                 adap.InsertCommand = comm;
                 adap.InsertCommand.ExecuteNonQuery();
 
@@ -104,9 +107,11 @@ namespace NWU_Pointsch_System
                 sql = "DELETE FROM Discipline_Type WHERE Discipline_Type = @type";
 
                 conn = new SqlConnection(conStr);
-                comm.Parameters.AddWithValue("@type", txtTypeName.Text);
                 conn.Open();
                 comm = new SqlCommand(sql, conn);
+                adap = new SqlDataAdapter();
+                comm.Parameters.AddWithValue("@type", txtTypeName.Text);
+                
                 adap.InsertCommand = comm;
                 adap.InsertCommand.ExecuteNonQuery();
 
@@ -119,9 +124,11 @@ namespace NWU_Pointsch_System
                 sql = "DELETE FROM Infraction_Type WHERE Infraction_Type = @type";
 
                 conn = new SqlConnection(conStr);
-                comm.Parameters.AddWithValue("@type", txtTypeName.Text);
                 conn.Open();
                 comm = new SqlCommand(sql, conn);
+                adap = new SqlDataAdapter();
+                comm.Parameters.AddWithValue("@type", txtTypeName.Text);
+               
                 adap.InsertCommand = comm;
                 adap.InsertCommand.ExecuteNonQuery();
 
@@ -140,63 +147,76 @@ namespace NWU_Pointsch_System
             {
                 string cbResult = cbPosition.SelectedItem.ToString();
 
-
-                using (SqlConnection connection = new SqlConnection(conStr))
                 {
                     if (cbResult.Equals("Student"))//remove student
                     {
 
                         {
-                            SqlCommand cmd = new SqlCommand(
-                                                          "       DELETE FROM Student WHERE " +
+                            sql =                         "       DELETE FROM Student WHERE " +
                                                           "       Student_NWU_ID = @Student_NWU_ID AND Student_ID = @Student_ID AND Student_Name = @Student_Name AND" +
-                                                          "       Student_Surname = @Student_Surname AND Campus_Name = @Campus_Name");
+                                                          "       Student_Surname = @Student_Surname AND Campus_Name = @Campus_Name";
 
-                            cmd.CommandType = CommandType.Text;
-                            cmd.Connection = connection;
-                            cmd.Parameters.AddWithValue("@Student_NWU_ID", txtSNO.Text);
-                            cmd.Parameters.AddWithValue("@Student_ID", txtID.Text);
-                            cmd.Parameters.AddWithValue("@Student_Name", txtName.Text);
-                            cmd.Parameters.AddWithValue("@Student_Surname", txtSurname.Text);
-                            cmd.Parameters.AddWithValue("@Campus_Name", cbCampus.SelectedItem.ToString());
+                            conn = new SqlConnection(conStr);
+                            conn.Open();
+                            comm = new SqlCommand(sql, conn);
+                            adap = new SqlDataAdapter();
+                            comm.Parameters.AddWithValue("@Student_NWU_ID", txtSNO.Text);
+                            comm.Parameters.AddWithValue("@Student_ID", txtID.Text);
+                            comm.Parameters.AddWithValue("@Student_Name", txtName.Text);
+                            comm.Parameters.AddWithValue("@Student_Surname", txtSurname.Text);
+                            comm.Parameters.AddWithValue("@Campus_Name", cbCampus.SelectedItem.ToString());
+                            
+                            adap.InsertCommand = comm;
+                            adap.InsertCommand.ExecuteNonQuery();
 
-                            connection.Open();
+                            conn.Close();
+
                         }
 
                     }
                     else if (cbResult.Equals("Staff"))//remove staff
                     {
 
-                        SqlCommand cmd = new SqlCommand(
-                                                          "       DELETE FROM Staff WHERE " +
+                        sql =                             "       DELETE FROM Staff WHERE " +
                                                           "       Staff_NWU_ID = @Staff_NWU_ID AND Staff_ID = @Staff_ID AND Staff_Name = @Staff_Name AND" +
-                                                          "       Staff_Surname = @Staff_Surname AND Staff_Admin = @Staff_Admin AND Campus_Name = @Campus_Name");
-                        cmd.Connection = connection;
-                        cmd.Parameters.AddWithValue("@Staff_NWU_ID", txtSNO.Text);
-                        cmd.Parameters.AddWithValue("@Staff_ID", txtID.Text);
-                        cmd.Parameters.AddWithValue("@Staff_Name", txtName.Text);
-                        cmd.Parameters.AddWithValue("@Staff_Surname", txtSurname.Text);
-                        cmd.Parameters.AddWithValue("@Staff_Admin", false);
-                        cmd.Parameters.AddWithValue("@Campus_Name", cbCampus.SelectedItem.ToString());
+                                                          "       Staff_Surname = @Staff_Surname AND Staff_Admin = @Staff_Admin AND Campus_Name = @Campus_Name";
+                        conn = new SqlConnection(conStr);
+                        conn.Open();
+                        comm = new SqlCommand(sql, conn);
+                        adap = new SqlDataAdapter();
+                        comm.Parameters.AddWithValue("@Staff_NWU_ID", txtSNO.Text);
+                        comm.Parameters.AddWithValue("@Staff_ID", txtID.Text);
+                        comm.Parameters.AddWithValue("@Staff_Name", txtName.Text);
+                        comm.Parameters.AddWithValue("@Staff_Surname", txtSurname.Text);
+                        comm.Parameters.AddWithValue("@Staff_Admin", false);
+                        comm.Parameters.AddWithValue("@Campus_Name", cbCampus.SelectedItem.ToString());
+                        
+                        adap.InsertCommand = comm;
+                        adap.InsertCommand.ExecuteNonQuery();
 
-                        connection.Open();
+                        conn.Close();
+
                     }
                     else if (cbResult.Equals("Admin"))//remove admin
                     {
-                        SqlCommand cmd = new SqlCommand(
-                                                          "       DELETE FROM Staff WHERE " +
+                        sql =                             "       DELETE FROM Staff WHERE " +
                                                           "       Staff_NWU_ID = @Staff_NWU_ID AND Staff_ID = @Staff_ID AND Staff_Name = @Staff_Name AND" +
-                                                          "       Staff_Surname = @Staff_Surname AND Staff_Admin = @Staff_Admin AND Campus_Name = @Campus_Name");
-                        cmd.CommandType = CommandType.Text;
-                        cmd.Connection = connection;
-                        cmd.Parameters.AddWithValue("@Staff_NWU_ID", txtSNO.Text);
-                        cmd.Parameters.AddWithValue("@Staff_ID", txtID.Text);
-                        cmd.Parameters.AddWithValue("@Staff_Name", txtName.Text);
-                        cmd.Parameters.AddWithValue("@Staff_Surname", txtSurname.Text);
-                        cmd.Parameters.AddWithValue("@Staff_Admin", true);
-                        cmd.Parameters.AddWithValue("@Campus_Name", cbCampus.SelectedItem.ToString());
+                                                          "       Staff_Surname = @Staff_Surname AND Staff_Admin = @Staff_Admin AND Campus_Name = @Campus_Name";
+                        conn = new SqlConnection(conStr);
+                        conn.Open();
+                        comm = new SqlCommand(sql, conn);
+                        adap = new SqlDataAdapter();
+                        comm.Parameters.AddWithValue("@Staff_NWU_ID", txtSNO.Text);
+                        comm.Parameters.AddWithValue("@Staff_ID", txtID.Text);
+                        comm.Parameters.AddWithValue("@Staff_Name", txtName.Text);
+                        comm.Parameters.AddWithValue("@Staff_Surname", txtSurname.Text);
+                        comm.Parameters.AddWithValue("@Staff_Admin", true);
+                        comm.Parameters.AddWithValue("@Campus_Name", cbCampus.SelectedItem.ToString());
 
-                        connection.Open();
+                        adap.InsertCommand = comm;
+                        adap.InsertCommand.ExecuteNonQuery();
+
+                        conn.Close();
                     }
 
                 }
@@ -215,60 +235,72 @@ namespace NWU_Pointsch_System
             {
                 string cbResult = cbPosition.SelectedItem.ToString();
 
-
-                using (SqlConnection connection = new SqlConnection(conStr))
                 {
                     if (cbResult.Equals("Student"))//add new student
                     {
 
                         {
-                            SqlCommand cmd = new SqlCommand(
-                                                          "       INSERT INTO Student(Student_NWU_ID, Student_ID, Student_Name, Student_Surname, Campus_Name)" +
-                                                          "       VALUES(@Student_NWU_ID, @Student_ID, @Student_Name, @Student_Surname, @Campus_Name)");
-                            cmd.CommandType = CommandType.Text;
-                            cmd.Connection = connection;
-                            cmd.Parameters.AddWithValue("@Student_NWU_ID", txtSNO.Text);
-                            cmd.Parameters.AddWithValue("@Student_ID", txtID.Text);
-                            cmd.Parameters.AddWithValue("@Student_Name", txtName.Text);
-                            cmd.Parameters.AddWithValue("@Student_Surname", txtSurname.Text);
-                            cmd.Parameters.AddWithValue("@Campus_Name", cbCampus.SelectedItem.ToString());
+                            sql =                         "       INSERT INTO Student(Student_NWU_ID, Student_ID, Student_Name, Student_Surname, Campus_Name)" +
+                                                          "       VALUES(@Student_NWU_ID, @Student_ID, @Student_Name, @Student_Surname, @Campus_Name)";
+                            conn = new SqlConnection(conStr);
+                            conn.Open();
+                            comm = new SqlCommand(sql, conn);
+                            adap = new SqlDataAdapter();
+                            comm.Parameters.AddWithValue("@Student_NWU_ID", txtSNO.Text);
+                            comm.Parameters.AddWithValue("@Student_ID", txtID.Text);
+                            comm.Parameters.AddWithValue("@Student_Name", txtName.Text);
+                            comm.Parameters.AddWithValue("@Student_Surname", txtSurname.Text);
+                            comm.Parameters.AddWithValue("@Campus_Name", cbCampus.SelectedItem.ToString());
 
-                            connection.Open();
+                            adap.InsertCommand = comm;
+                            adap.InsertCommand.ExecuteNonQuery();
+
+                            conn.Close();
+                            System.Windows.Forms.MessageBox.Show("Successfully added user!");
                         }
 
                     }
                     else if (cbResult.Equals("Staff"))//add new staff
                     {
+                        sql =                             "       INSERT INTO Staff(Staff_NWU_ID, Staff_ID, Staff_Name, Staff_Surname, Staff_Admin Campus_Name)" +
+                                                          "       VALUES(@Staff_NWU_ID, @Staff_ID, @Staff_Name, @Staff_Surname, @Staff_Admin @Campus_Name)";
+                        conn = new SqlConnection(conStr);
+                        conn.Open();
+                        comm = new SqlCommand(sql, conn);
+                        adap = new SqlDataAdapter();
+                        comm.Parameters.AddWithValue("@Staff_NWU_ID", txtSNO.Text);
+                        comm.Parameters.AddWithValue("@Staff_ID", txtID.Text);
+                        comm.Parameters.AddWithValue("@Staff_Name", txtName.Text);
+                        comm.Parameters.AddWithValue("@Staff_Surname", txtSurname.Text);
+                        comm.Parameters.AddWithValue("@Staff_Admin", false);
+                        comm.Parameters.AddWithValue("@Campus_Name", cbCampus.SelectedItem.ToString());
 
-                        SqlCommand cmd = new SqlCommand(
-                                                          "       INSERT INTO Staff(Staff_NWU_ID, Staff_ID, Staff_Name, Staff_Surname, Staff_Admin Campus_Name)" +
-                                                          "       VALUES(@Staff_NWU_ID, @Staff_ID, @Staff_Name, @Staff_Surname, @Staff_Admin @Campus_Name)");
-                        cmd.CommandType = CommandType.Text;
-                        cmd.Connection = connection;
-                        cmd.Parameters.AddWithValue("@Staff_NWU_ID", txtSNO.Text);
-                        cmd.Parameters.AddWithValue("@Staff_ID", txtID.Text);
-                        cmd.Parameters.AddWithValue("@Staff_Name", txtName.Text);
-                        cmd.Parameters.AddWithValue("@Staff_Surname", txtSurname.Text);
-                        cmd.Parameters.AddWithValue("@Staff_Admin", false);
-                        cmd.Parameters.AddWithValue("@Campus_Name", cbCampus.SelectedItem.ToString());
+                        adap.InsertCommand = comm;
+                        adap.InsertCommand.ExecuteNonQuery();
 
-                        connection.Open();
+                        conn.Close();
+                        System.Windows.Forms.MessageBox.Show("Successfully added user!");
                     }
                     else if (cbResult.Equals("Admin"))//add new admin
                     {
-                        SqlCommand cmd = new SqlCommand(
-                                                          "       INSERT INTO Staff(Staff_NWU_ID, Staff_ID, Staff_Name, Staff_Surname, Staff_Admin Campus_Name)" +
-                                                          "       VALUES(@Staff_NWU_ID, @Staff_ID, @Staff_Name, @Staff_Surname, @Staff_Admin @Campus_Name)");
-                        cmd.CommandType = CommandType.Text;
-                        cmd.Connection = connection;
-                        cmd.Parameters.AddWithValue("@Staff_NWU_ID", txtSNO.Text); 
-                        cmd.Parameters.AddWithValue("@Staff_ID", txtID.Text);
-                        cmd.Parameters.AddWithValue("@Staff_Name", txtName.Text);
-                        cmd.Parameters.AddWithValue("@Staff_Surname", txtSurname.Text);
-                        cmd.Parameters.AddWithValue("@Staff_Admin", true);
-                        cmd.Parameters.AddWithValue("@Campus_Name", cbCampus.SelectedItem.ToString());
+                        sql =                             "       INSERT INTO Staff(Staff_NWU_ID, Staff_ID, Staff_Name, Staff_Surname, Staff_Admin Campus_Name)" +
+                                                          "       VALUES(@Staff_NWU_ID, @Staff_ID, @Staff_Name, @Staff_Surname, @Staff_Admin @Campus_Name)";
+                        conn = new SqlConnection(conStr);
+                        conn.Open();
+                        comm = new SqlCommand(sql, conn);
+                        adap = new SqlDataAdapter();
+                        comm.Parameters.AddWithValue("@Staff_NWU_ID", txtSNO.Text);
+                        comm.Parameters.AddWithValue("@Staff_ID", txtID.Text);
+                        comm.Parameters.AddWithValue("@Staff_Name", txtName.Text);
+                        comm.Parameters.AddWithValue("@Staff_Surname", txtSurname.Text);
+                        comm.Parameters.AddWithValue("@Staff_Admin", true);
+                        comm.Parameters.AddWithValue("@Campus_Name", cbCampus.SelectedItem.ToString());
 
-                        connection.Open();
+                        adap.InsertCommand = comm;
+                        adap.InsertCommand.ExecuteNonQuery();
+
+                        conn.Close();
+                        System.Windows.Forms.MessageBox.Show("Successfully added user!");
                     }
                     
                 }
@@ -278,7 +310,7 @@ namespace NWU_Pointsch_System
                 System.Windows.Forms.MessageBox.Show(ex.ToString());
             }
 
-            System.Windows.Forms.MessageBox.Show("Successfully added user!");
+
         }
     }
 }
