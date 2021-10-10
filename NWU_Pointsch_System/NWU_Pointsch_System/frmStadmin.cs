@@ -59,20 +59,6 @@ namespace NWU_Pointsch_System
             fPM.ShowDialog();
         }
 
-        private void btnRemoveDiscipline_Click(object sender, EventArgs e)
-        {
-            frmPointschMachine fPM = new frmPointschMachine();
-            fPM.sActionType = "RD";
-            fPM.ShowDialog();
-        }
-
-        private void btnRemoveInfraction_Click(object sender, EventArgs e)
-        {
-            frmPointschMachine fPM = new frmPointschMachine();
-            fPM.sActionType = "RI";
-            fPM.ShowDialog();
-        }
-
         private void btnReport_Click(object sender, EventArgs e)
         {
             frmReport fRep = new frmReport();
