@@ -48,6 +48,7 @@ namespace NWU_Pointsch_System
             this.txtStudentNum = new System.Windows.Forms.TextBox();
             this.btnGetStudent = new System.Windows.Forms.Button();
             this.btnFinalize = new System.Windows.Forms.Button();
+            this.lblMinMax = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picbPurpleThing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -129,6 +130,7 @@ namespace NWU_Pointsch_System
             // 
             // gbAction
             // 
+            this.gbAction.Controls.Add(this.lblMinMax);
             this.gbAction.Controls.Add(this.txtPointschValue);
             this.gbAction.Controls.Add(this.label1);
             this.gbAction.Controls.Add(this.label4);
@@ -149,7 +151,7 @@ namespace NWU_Pointsch_System
             this.txtPointschValue.Location = new System.Drawing.Point(104, 63);
             this.txtPointschValue.Margin = new System.Windows.Forms.Padding(2);
             this.txtPointschValue.Name = "txtPointschValue";
-            this.txtPointschValue.Size = new System.Drawing.Size(71, 20);
+            this.txtPointschValue.Size = new System.Drawing.Size(108, 20);
             this.txtPointschValue.TabIndex = 6;
             // 
             // label1
@@ -207,9 +209,8 @@ namespace NWU_Pointsch_System
             this.lblStudentDetail.Location = new System.Drawing.Point(3, 44);
             this.lblStudentDetail.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStudentDetail.Name = "lblStudentDetail";
-            this.lblStudentDetail.Size = new System.Drawing.Size(311, 13);
+            this.lblStudentDetail.Size = new System.Drawing.Size(0, 13);
             this.lblStudentDetail.TabIndex = 4;
-            this.lblStudentDetail.Text = "[NAME] [SURNAME] WILL BE AFFECTED BY THIS REQUEST";
             // 
             // label2
             // 
@@ -250,6 +251,16 @@ namespace NWU_Pointsch_System
             this.btnFinalize.Text = "FINALIZE";
             this.btnFinalize.UseVisualStyleBackColor = true;
             this.btnFinalize.Click += new System.EventHandler(this.btnFinalize_Click);
+            // 
+            // lblMinMax
+            // 
+            this.lblMinMax.AutoSize = true;
+            this.lblMinMax.Location = new System.Drawing.Point(179, 66);
+            this.lblMinMax.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMinMax.Name = "lblMinMax";
+            this.lblMinMax.Size = new System.Drawing.Size(0, 13);
+            this.lblMinMax.TabIndex = 6;
+            this.lblMinMax.Click += new System.EventHandler(this.label5_Click);
             // 
             // frmPointschMachine
             // 
@@ -302,5 +313,6 @@ namespace NWU_Pointsch_System
         private System.Windows.Forms.Button btnFinalize;
         private System.Windows.Forms.TextBox txtPointschValue;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblMinMax;
     }
 }

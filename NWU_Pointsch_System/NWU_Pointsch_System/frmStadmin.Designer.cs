@@ -53,9 +53,7 @@ namespace NWU_Pointsch_System
             this.lbDiscipline = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnReport = new System.Windows.Forms.Button();
-            this.btnRemoveInfraction = new System.Windows.Forms.Button();
             this.btnAddInfraction = new System.Windows.Forms.Button();
-            this.btnRemoveDiscipline = new System.Windows.Forms.Button();
             this.btnAddDiscipline = new System.Windows.Forms.Button();
             this.btnEditDB = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
@@ -318,9 +316,7 @@ namespace NWU_Pointsch_System
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnReport);
-            this.groupBox1.Controls.Add(this.btnRemoveInfraction);
             this.groupBox1.Controls.Add(this.btnAddInfraction);
-            this.groupBox1.Controls.Add(this.btnRemoveDiscipline);
             this.groupBox1.Controls.Add(this.btnAddDiscipline);
             this.groupBox1.Location = new System.Drawing.Point(74, 380);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
@@ -342,45 +338,23 @@ namespace NWU_Pointsch_System
             this.btnReport.UseVisualStyleBackColor = true;
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
-            // btnRemoveInfraction
-            // 
-            this.btnRemoveInfraction.Location = new System.Drawing.Point(248, 65);
-            this.btnRemoveInfraction.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRemoveInfraction.Name = "btnRemoveInfraction";
-            this.btnRemoveInfraction.Size = new System.Drawing.Size(204, 32);
-            this.btnRemoveInfraction.TabIndex = 4;
-            this.btnRemoveInfraction.Text = "REMOVE INFRACTION";
-            this.btnRemoveInfraction.UseVisualStyleBackColor = true;
-            this.btnRemoveInfraction.Click += new System.EventHandler(this.btnRemoveInfraction_Click);
-            // 
             // btnAddInfraction
             // 
             this.btnAddInfraction.Location = new System.Drawing.Point(6, 65);
             this.btnAddInfraction.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddInfraction.Name = "btnAddInfraction";
-            this.btnAddInfraction.Size = new System.Drawing.Size(226, 32);
+            this.btnAddInfraction.Size = new System.Drawing.Size(450, 32);
             this.btnAddInfraction.TabIndex = 3;
             this.btnAddInfraction.Text = "ADD INFRACTION";
             this.btnAddInfraction.UseVisualStyleBackColor = true;
             this.btnAddInfraction.Click += new System.EventHandler(this.btnAddInfraction_Click);
-            // 
-            // btnRemoveDiscipline
-            // 
-            this.btnRemoveDiscipline.Location = new System.Drawing.Point(248, 16);
-            this.btnRemoveDiscipline.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRemoveDiscipline.Name = "btnRemoveDiscipline";
-            this.btnRemoveDiscipline.Size = new System.Drawing.Size(204, 32);
-            this.btnRemoveDiscipline.TabIndex = 2;
-            this.btnRemoveDiscipline.Text = "REMOVE DISCIPLINE";
-            this.btnRemoveDiscipline.UseVisualStyleBackColor = true;
-            this.btnRemoveDiscipline.Click += new System.EventHandler(this.btnRemoveDiscipline_Click);
             // 
             // btnAddDiscipline
             // 
             this.btnAddDiscipline.Location = new System.Drawing.Point(6, 16);
             this.btnAddDiscipline.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddDiscipline.Name = "btnAddDiscipline";
-            this.btnAddDiscipline.Size = new System.Drawing.Size(226, 32);
+            this.btnAddDiscipline.Size = new System.Drawing.Size(450, 32);
             this.btnAddDiscipline.TabIndex = 0;
             this.btnAddDiscipline.Text = "ADD DISCIPLINE";
             this.btnAddDiscipline.UseVisualStyleBackColor = true;
@@ -463,9 +437,7 @@ namespace NWU_Pointsch_System
         private System.Windows.Forms.ListBox lbDiscipline;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnReport;
-        private System.Windows.Forms.Button btnRemoveInfraction;
         private System.Windows.Forms.Button btnAddInfraction;
-        private System.Windows.Forms.Button btnRemoveDiscipline;
         private System.Windows.Forms.Button btnAddDiscipline;
         private System.Windows.Forms.Button btnLogout;
         public System.Windows.Forms.Label lblSno;
