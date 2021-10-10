@@ -63,9 +63,6 @@ namespace NWU_Pointsch_System
         private void btnClear_Click(object sender, EventArgs e)
         {
             lstReport.Items.Clear();
-            FormatOutput();
-            LoadDiscipline();
-            LoadInfraction();
         }
         /* Load discipline data into the report */
         private void LoadDiscipline()
@@ -73,7 +70,7 @@ namespace NWU_Pointsch_System
             if (sort == "ASC")
             {
                 sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                       "FROM Discipline GROUP BY DISCIPLINE_TYPE_CODE" +
+                       "FROM Discipline GROUP BY DISCIPLINE_TYPE_CODE " +
                        "ORDER BY Discipline_Type_Code ASC";
 
                 comm = new SqlCommand(sqlD, conn);
@@ -103,7 +100,7 @@ namespace NWU_Pointsch_System
             else if(sort == "DESC")
             {
                 sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                       "FROM Discipline GROUP BY DISCIPLINE_TYPE_CODE" +
+                       "FROM Discipline GROUP BY DISCIPLINE_TYPE_CODE " +
                        "ORDER BY Discipline_Type_Code DESC";
 
                 comm = new SqlCommand(sqlD, conn);
@@ -130,7 +127,8 @@ namespace NWU_Pointsch_System
 
                 reader.Close();
             }
-            
+
+ 
         }
         /* Load infraction data into the report */
         private void LoadInfraction()
@@ -138,7 +136,7 @@ namespace NWU_Pointsch_System
             if (sort == "ASC")
             {
                 sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                       "FROM Infraction GROUP BY INFRACTION_TYPE_CODE" +
+                       "FROM Infraction GROUP BY INFRACTION_TYPE_CODE " +
                        "ORDER BY Infraction_Type_Code ASC";
 
                 comm = new SqlCommand(sqlI, conn);
@@ -169,7 +167,7 @@ namespace NWU_Pointsch_System
             else if (sort == "DESC")
             {
                 sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                       "FROM Infraction GROUP BY INFRACTION_TYPE_CODE" +
+                       "FROM Infraction GROUP BY INFRACTION_TYPE_CODE " +
                        "ORDER BY Infraction_Type_Code DESC";
 
                 comm = new SqlCommand(sqlI, conn);
@@ -202,6 +200,11 @@ namespace NWU_Pointsch_System
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
+            Filtered();      
+        }
+
+        private void Filtered ()
+        {
             conn = new SqlConnection(constr);
             conn.Open();
 
@@ -216,7 +219,7 @@ namespace NWU_Pointsch_System
                 LoadDiscipline();
                 LoadInfraction();
             }
-            else if(cmbMonth.SelectedIndex.ToString() != null)//If the Combobox for the campus filter is empty
+            else if (cmbMonth.SelectedIndex.ToString() != null)//If the Combobox for the campus filter is empty
             {
                 FormatOutput();
                 switch (cmbMonth.SelectedIndex)//Switch to determine the month
@@ -259,11 +262,11 @@ namespace NWU_Pointsch_System
                         break;
                 }
 
-                
+
 
                 if (action == "Both")//Displays both action types
                 {
-                    if(sort == "ASC")//Sorting the values in ascending order
+                    if (sort == "ASC")//Sorting the values in ascending order
                     {
                         sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
                                "FROM Discipline " +
@@ -275,7 +278,7 @@ namespace NWU_Pointsch_System
                                "WHERE Infraction_Date = @month " +
                                "ORDER BY Infraction_Type_Code ASC";
                     }
-                    else if(sort == "DESC")//Sorting the values in descending order
+                    else if (sort == "DESC")//Sorting the values in descending order
                     {
                         sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
                                "FROM Discipline " +
@@ -287,7 +290,7 @@ namespace NWU_Pointsch_System
                                "WHERE Infraction_Date = @month " +
                                "ORDER BY Infraction_Type_Code DESC";
                     }
-                    
+
 
                     comm = new SqlCommand(sqlD, conn);
                     comm.Parameters.AddWithValue("@month", month);
@@ -305,7 +308,7 @@ namespace NWU_Pointsch_System
 
                     lstReport.Items.Add("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-                    
+
 
                     comm = new SqlCommand(sqlI, conn);
                     comm.Parameters.AddWithValue("@month", month);
@@ -327,18 +330,18 @@ namespace NWU_Pointsch_System
                     {
                         sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
                                "FROM Discipline " +
-                               "WHERE Discipline_Date = @month" +
+                               "WHERE Discipline_Date = @month " +
                                "ORDER BY Discipline_Type_Code ASC";
                     }
                     else if (sort == "DESC")//Sorting the values in descending order
                     {
                         sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
                                "FROM Discipline " +
-                               "WHERE Discipline_Date = @month" +
+                               "WHERE Discipline_Date = @month " +
                                "ORDER BY Discipline_Type_Code DESC";
                     }
 
-                    
+
 
                     comm = new SqlCommand(sqlD, conn);
                     comm.Parameters.AddWithValue("@month", month);
@@ -360,18 +363,18 @@ namespace NWU_Pointsch_System
                     {
                         sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
                                "FROM Infraction " +
-                               "WHERE Infraction_Date = @month" +
+                               "WHERE Infraction_Date = @month " +
                                "ORDER BY Infraction_Type_Code ASC";
                     }
                     else if (sort == "DESC")//Sorting the values in descending order
                     {
                         sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
                                "FROM Infraction " +
-                               "WHERE Infraction_Date = @month" +
+                               "WHERE Infraction_Date = @month " +
                                "ORDER BY Infraction_Type_Code DESC";
                     }
 
-                                             
+
 
                     comm = new SqlCommand(sqlI, conn);
                     comm.Parameters.AddWithValue("@month", month);
@@ -388,7 +391,7 @@ namespace NWU_Pointsch_System
                     reader.Close();
                 }
 
-                
+
             }
             else if (cmbCampus.SelectedIndex.ToString() != null)
             {
@@ -406,7 +409,7 @@ namespace NWU_Pointsch_System
                         break;
                 }
 
-                if(action == "Both")//Displays both action types
+                if (action == "Both")//Displays both action types
                 {
                     if (sort == "ASC")//Sorting the values in ascending order
                     {
@@ -437,7 +440,7 @@ namespace NWU_Pointsch_System
                                "ORDER BY Infraction_Type.Infraction_Type DESC";
                     }
 
-                    
+
 
                     comm = new SqlCommand(sqlD, conn);
                     comm.Parameters.AddWithValue("@campus", campus);
@@ -455,7 +458,7 @@ namespace NWU_Pointsch_System
 
                     lstReport.Items.Add("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-                    
+
 
                     comm = new SqlCommand(sqlI, conn);
                     comm.Parameters.AddWithValue("@campus", campus);
@@ -471,7 +474,7 @@ namespace NWU_Pointsch_System
 
                     reader.Close();
                 }
-                else if(action == "Discipline")//Displays only the discipline action types
+                else if (action == "Discipline")//Displays only the discipline action types
                 {
                     if (sort == "ASC")//Sorting the values in ascending order
                     {
@@ -490,7 +493,7 @@ namespace NWU_Pointsch_System
                                "ORDER BY Discipline_Type.Discipline_Type DESC";
                     }
 
-                    
+
 
                     comm = new SqlCommand(sqlD, conn);
                     comm.Parameters.AddWithValue("@campus", campus);
@@ -506,7 +509,7 @@ namespace NWU_Pointsch_System
 
                     reader.Close();
                 }
-                else if(action == "Infraction")//Displays only the infraction action types
+                else if (action == "Infraction")//Displays only the infraction action types
                 {
                     if (sort == "ASC")//Sorting the values in ascending order
                     {
@@ -524,7 +527,7 @@ namespace NWU_Pointsch_System
                                "GROUP BY Infraction_Type.Infraction_Type " +
                                "ORDER BY Infraction_Type.Infraction_Type DESC";
                     }
-                                        
+
                     comm = new SqlCommand(sqlI, conn);
                     comm.Parameters.AddWithValue("@campus", campus);
                     reader = comm.ExecuteReader();
@@ -540,7 +543,7 @@ namespace NWU_Pointsch_System
                     reader.Close();
                 }
 
-                
+
             }
             else
             {
@@ -629,7 +632,7 @@ namespace NWU_Pointsch_System
                                "ORDER BY Infraction_Type.Infraction_Type DESC";
                     }
 
-                    
+
 
                     comm = new SqlCommand(sqlD, conn);
                     comm.Parameters.AddWithValue("@month", month);
@@ -648,7 +651,7 @@ namespace NWU_Pointsch_System
 
                     lstReport.Items.Add("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-                    
+
 
                     comm = new SqlCommand(sqlI, conn);
                     comm.Parameters.AddWithValue("@month", month);
@@ -684,7 +687,7 @@ namespace NWU_Pointsch_System
                                "ORDER BY Discipline_Type.Discipline_Type DESC";
                     }
 
-                    
+
 
                     comm = new SqlCommand(sqlD, conn);
                     comm.Parameters.AddWithValue("@month", month);
@@ -720,7 +723,7 @@ namespace NWU_Pointsch_System
                                "ORDER BY Infraction_Type.Infraction_Type DESC";
                     }
 
-                    
+
 
                     comm = new SqlCommand(sqlI, conn);
                     comm.Parameters.AddWithValue("@month", month);
@@ -738,9 +741,8 @@ namespace NWU_Pointsch_System
                     reader.Close();
                 }
 
-                
+
             }
-            conn.Close();
         }
 
         private void rbAsc_CheckedChanged(object sender, EventArgs e)
@@ -749,6 +751,8 @@ namespace NWU_Pointsch_System
             {
                 sort = "ASC";
                 rbDesc.Checked = false;
+
+                Filtered();
             }
         }
 
@@ -758,6 +762,8 @@ namespace NWU_Pointsch_System
             {
                 sort = "DESC";
                 rbAsc.Checked = false;
+
+                Filtered();
             }
         }
 
@@ -765,9 +771,13 @@ namespace NWU_Pointsch_System
         {
             if(rbBoth.Checked == true)
             {
+                lstReport.Items.Clear();
+
                 action = "Both";
                 rbDiscipline.Checked = false;
                 rbInfraction.Checked = false;
+
+                Filtered();
             }
         }
 
@@ -775,9 +785,13 @@ namespace NWU_Pointsch_System
         {
             if (rbDiscipline.Checked == true)
             {
+                lstReport.Items.Clear();
+
                 action = "Discipline";
                 rbBoth.Checked = false;
                 rbInfraction.Checked = false;
+
+                Filtered();
             }
         }
 
@@ -785,11 +799,21 @@ namespace NWU_Pointsch_System
         {
             if (rbInfraction.Checked == true)
             {
+                lstReport.Items.Clear();
+
                 action = "Infraction";
                 rbBoth.Checked = false;
                 rbDiscipline.Checked = false;
+
+                Filtered();
             }
         }
+
+        private void frmReport_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            conn.Close();
+        }
+
 
         /* Close the report form */
         private void btnBack_Click(object sender, EventArgs e)
