@@ -28,11 +28,7 @@ namespace NWU_Pointsch_System
 
         private void frmProfile_Load(object sender, EventArgs e)
         {
-            frmLogin loginForm = new frmLogin();
-
-
-
-            string sNum = loginForm.StudentNumber;
+            string sNum = lblSnoPhys.Text;
             sql = "SELECT SUM(dt.Discipline_Pointsch) As Points, s.Student_ID, s.Student_Name " +
                 "FROM Student s LEFT JOIN Discipline d on d.Student_NWU_ID = s.Student_ID LEFT JOIN Discipline_Type dt on dt.Discipline_Type_Code = d.Discipline_Type_Code " +
                 "WHERE s.Student_ID = @StudentNumber GROUP BY s.Student_ID, s.Student_Name"; //get the acumilated Discipline pointsch
