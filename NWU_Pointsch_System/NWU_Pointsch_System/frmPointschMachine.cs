@@ -44,7 +44,7 @@ namespace NWU_Pointsch_System
         {
             if (sActionType == "AD")
             {
-                sql = "INSERT INTO Discipline(Discipline_Date, Discipline_Discription, Discipline_Pointsch) VALUES (@Date, @Discription, @Pointsch) WHERE (Student_NWU_ID = @StudentNumber)";  // Isert new record ///////////////////////ek dink die sal werk maar maak net seker asb emile want dis oor versilende tables
+                sql = "INSERT INTO Discipline(Discipline_Date, Discipline_Discription, Discipline_Pointsch) VALUES (@Date, @Discription, @Pointsch) WHERE (Student_NWU_ID = @StudentNumber)";  // Isert new Discipline record ///////////////////////ek dink die sal werk maar maak net seker asb emile want dis oor versilende tables
                 sql2 = "INSERT INTO Discipline_type(Discipline_type) VALUES (@Type) WHERE (Student_NWU_ID = @StudentNumber)";
 
                 conn = new SqlConnection(conStr);
@@ -66,7 +66,7 @@ namespace NWU_Pointsch_System
 
             if (sActionType == "AI")
             {
-                sql = "INSERT INTO Infraction(Infraction_Date, Infraction_Discription, Infraction_Pointsch) VALUES (@Date, @Discription, @Pointsch) WHERE (Student_NWU_ID = @StudentNumber)";  // Isert new record ///////////////////////ek dink die sal werk maar maak net seker asb emile want dis oor versilende tables
+                sql = "INSERT INTO Infraction(Infraction_Date, Infraction_Discription, Infraction_Pointsch) VALUES (@Date, @Discription, @Pointsch) WHERE (Student_NWU_ID = @StudentNumber)";  // Isert new Infraction record ///////////////////////ek dink die sal werk maar maak net seker asb emile want dis oor versilende tables
                 sql2 = "INSERT INTO Infraction(Infraction_type) VALUES (@Type) WHERE (Student_NWU_ID = @StudentNumber)";
 
                 conn = new SqlConnection(conStr);
@@ -89,7 +89,7 @@ namespace NWU_Pointsch_System
 
         private void btnGetStudent_Click(object sender, EventArgs e)
         {
-            sql = "SELECT Student_Name, Student_Surname FROM Student WHERE (Student_NWU_ID = @StudentNumber)"; 
+            sql = "SELECT Student_Name, Student_Surname FROM Student WHERE (Student_NWU_ID = @StudentNumber)"; // Find student name surname acording to student num filled in
 
             conn = new SqlConnection(conStr);
             comm = new SqlCommand(sql);
@@ -202,7 +202,7 @@ namespace NWU_Pointsch_System
                 }
             }
 
-            if (sActionType == "RI")///populate rtb with Discipline date of selected discription
+            if (sActionType == "RI")//populate rtb with Discipline date of selected discription
             {
                 sql = "SELECT Discipline_Discription, Discipline_Date FROM Discipline WHERE (Discipline_Discription = @discription)";
 

@@ -333,6 +333,7 @@ namespace NWU_Pointsch_System
             this.Name = "frmProfile";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Profile:";
+            this.Load += new System.EventHandler(this.frmProfile_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.picbSoSA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picbStatus)).EndInit();
             this.gbInfo.ResumeLayout(false);
