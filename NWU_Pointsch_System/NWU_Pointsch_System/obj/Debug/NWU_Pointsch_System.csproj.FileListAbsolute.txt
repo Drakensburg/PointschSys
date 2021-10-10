@@ -82,3 +82,4 @@ C:\Users\kiaan\source\repos\GitHub\PointschSys\NWU_Pointsch_System\NWU_Pointsch_
 C:\Users\kiaan\source\repos\GitHub\PointschSys\NWU_Pointsch_System\NWU_Pointsch_System\obj\Debug\NWU_Pointsch_System.csproj.CoreCompileInputs.cache
 C:\Users\kiaan\source\repos\GitHub\PointschSys\NWU_Pointsch_System\NWU_Pointsch_System\obj\Debug\NWU_Pointsch_System.exe
 C:\Users\kiaan\source\repos\GitHub\PointschSys\NWU_Pointsch_System\NWU_Pointsch_System\obj\Debug\NWU_Pointsch_System.pdb
+C:\Users\Tjaar\OneDrive\Desktop\POINTSCH SYSTEM\PointschSys\NWU_Pointsch_System\NWU_Pointsch_System\obj\Debug\NWU_Pointsch_System.csproj.AssemblyReference.cache

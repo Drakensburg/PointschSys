@@ -73,7 +73,7 @@ namespace NWU_Pointsch_System
             if (sort == "ASC")
             {
                 sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                       "FROM Discipline " +
+                       "FROM Discipline GROUP BY DISCIPLINE_TYPE_CODE" +
                        "ORDER BY Discipline_Type_Code ASC";
 
                 comm = new SqlCommand(sqlD, conn);
@@ -103,7 +103,7 @@ namespace NWU_Pointsch_System
             else if(sort == "DESC")
             {
                 sqlD = "SELECT Discipline_Type_Code, SUM(Discipline_Pointsch) AS Discipline_Total " +
-                       "FROM Discipline " +
+                       "FROM Discipline GROUP BY DISCIPLINE_TYPE_CODE" +
                        "ORDER BY Discipline_Type_Code DESC";
 
                 comm = new SqlCommand(sqlD, conn);
@@ -138,7 +138,7 @@ namespace NWU_Pointsch_System
             if (sort == "ASC")
             {
                 sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                       "FROM Infraction " +
+                       "FROM Infraction GROUP BY INFRACTION_TYPE_CODE" +
                        "ORDER BY Infraction_Type_Code ASC";
 
                 comm = new SqlCommand(sqlI, conn);
@@ -169,7 +169,7 @@ namespace NWU_Pointsch_System
             else if (sort == "DESC")
             {
                 sqlI = "SELECT Infraction_Type_Code, SUM(Infraction_Pointsch) AS Infraction_Total " +
-                       "FROM Infraction " +
+                       "FROM Infraction GROUP BY INFRACTION_TYPE_CODE" +
                        "ORDER BY Infraction_Type_Code DESC";
 
                 comm = new SqlCommand(sqlI, conn);
