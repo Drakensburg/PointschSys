@@ -49,6 +49,8 @@ namespace NWU_Pointsch_System
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.gbPointschInformation = new System.Windows.Forms.GroupBox();
+            this.txtMax = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnPIRemove = new System.Windows.Forms.Button();
             this.btnPIAdd = new System.Windows.Forms.Button();
             this.lblTypeName = new System.Windows.Forms.Label();
@@ -57,8 +59,10 @@ namespace NWU_Pointsch_System
             this.txtTypeName = new System.Windows.Forms.TextBox();
             this.lblDI = new System.Windows.Forms.Label();
             this.cbDI = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtMax = new System.Windows.Forms.TextBox();
+            this.btnGridStudents = new System.Windows.Forms.Button();
+            this.btnGridStaff = new System.Windows.Forms.Button();
+            this.btnGridDis = new System.Windows.Forms.Button();
+            this.btnGridInf = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPointsch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picbPurpleThing)).BeginInit();
             this.gbPersonalInformation.SuspendLayout();
@@ -286,6 +290,24 @@ namespace NWU_Pointsch_System
             this.gbPointschInformation.TabStop = false;
             this.gbPointschInformation.Text = "POITSCH INFORMATION";
             // 
+            // txtMax
+            // 
+            this.txtMax.Location = new System.Drawing.Point(244, 78);
+            this.txtMax.Margin = new System.Windows.Forms.Padding(2);
+            this.txtMax.Name = "txtMax";
+            this.txtMax.Size = new System.Drawing.Size(123, 20);
+            this.txtMax.TabIndex = 14;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(207, 81);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(33, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "MAX:";
+            // 
             // btnPIRemove
             // 
             this.btnPIRemove.Location = new System.Drawing.Point(186, 99);
@@ -368,23 +390,49 @@ namespace NWU_Pointsch_System
             this.cbDI.TabIndex = 2;
             this.cbDI.Text = "SELECT A D/I";
             // 
-            // label2
+            // btnGridStudents
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(207, 81);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "MAX:";
+            this.btnGridStudents.Location = new System.Drawing.Point(102, 439);
+            this.btnGridStudents.Margin = new System.Windows.Forms.Padding(2);
+            this.btnGridStudents.Name = "btnGridStudents";
+            this.btnGridStudents.Size = new System.Drawing.Size(111, 28);
+            this.btnGridStudents.TabIndex = 28;
+            this.btnGridStudents.Text = "Display Students";
+            this.btnGridStudents.UseVisualStyleBackColor = true;
+            this.btnGridStudents.Click += new System.EventHandler(this.btnGridStudents_Click);
             // 
-            // txtMax
+            // btnGridStaff
             // 
-            this.txtMax.Location = new System.Drawing.Point(244, 78);
-            this.txtMax.Margin = new System.Windows.Forms.Padding(2);
-            this.txtMax.Name = "txtMax";
-            this.txtMax.Size = new System.Drawing.Size(123, 20);
-            this.txtMax.TabIndex = 14;
+            this.btnGridStaff.Location = new System.Drawing.Point(217, 439);
+            this.btnGridStaff.Margin = new System.Windows.Forms.Padding(2);
+            this.btnGridStaff.Name = "btnGridStaff";
+            this.btnGridStaff.Size = new System.Drawing.Size(111, 28);
+            this.btnGridStaff.TabIndex = 29;
+            this.btnGridStaff.Text = "Display Staff";
+            this.btnGridStaff.UseVisualStyleBackColor = true;
+            this.btnGridStaff.Click += new System.EventHandler(this.btnGridStaff_Click);
+            // 
+            // btnGridDis
+            // 
+            this.btnGridDis.Location = new System.Drawing.Point(445, 444);
+            this.btnGridDis.Margin = new System.Windows.Forms.Padding(2);
+            this.btnGridDis.Name = "btnGridDis";
+            this.btnGridDis.Size = new System.Drawing.Size(111, 28);
+            this.btnGridDis.TabIndex = 30;
+            this.btnGridDis.Text = "Display Discipline\'s";
+            this.btnGridDis.UseVisualStyleBackColor = true;
+            this.btnGridDis.Click += new System.EventHandler(this.btnGridDis_Click);
+            // 
+            // btnGridInf
+            // 
+            this.btnGridInf.Location = new System.Drawing.Point(560, 444);
+            this.btnGridInf.Margin = new System.Windows.Forms.Padding(2);
+            this.btnGridInf.Name = "btnGridInf";
+            this.btnGridInf.Size = new System.Drawing.Size(111, 28);
+            this.btnGridInf.TabIndex = 31;
+            this.btnGridInf.Text = "Display Infractions";
+            this.btnGridInf.UseVisualStyleBackColor = true;
+            this.btnGridInf.Click += new System.EventHandler(this.btnGridInf_Click);
             // 
             // frmDBEdit
             // 
@@ -392,6 +440,10 @@ namespace NWU_Pointsch_System
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(831, 474);
+            this.Controls.Add(this.btnGridInf);
+            this.Controls.Add(this.btnGridDis);
+            this.Controls.Add(this.btnGridStaff);
+            this.Controls.Add(this.btnGridStudents);
             this.Controls.Add(this.gbPointschInformation);
             this.Controls.Add(this.gbPersonalInformation);
             this.Controls.Add(this.btnBack);
@@ -444,5 +496,9 @@ namespace NWU_Pointsch_System
         private System.Windows.Forms.ComboBox cbCampus;
         private System.Windows.Forms.TextBox txtMax;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnGridStudents;
+        private System.Windows.Forms.Button btnGridStaff;
+        private System.Windows.Forms.Button btnGridDis;
+        private System.Windows.Forms.Button btnGridInf;
     }
 }

@@ -44,21 +44,15 @@ namespace NWU_Pointsch_System
             //MessageBox.Show(currentDateTime.ToString());
             if (sActionType == "AD")
             {
-                sql = "INSERT INTO Discipline (Discipline_Date, Discipline_Description, Discipline_Pointsch) VALUES (" + DateTime.Today.ToString("dd/MM/yyyy") +", "+ txtDescription.Text +", "+ txtPointschValue.Text +")";  // Insert new Discipline record ///////////////////////ek dink die sal werk maar maak net seker asb emile want dis oor versilende tables
-                sql2 = "INSERT INTO Discipline_type (Discipline_type) VALUES ("+ cmbActionType.SelectedItem.ToString() +")";
+                sql = "INSERT INTO Discipline (Discipline_Date, Discipline_Description, Discipline_Pointsch) " +
+                    "VALUES (" + DateTime.Today.ToString("dd/MM/yyyy") +", "+ txtDescription.Text +", "+ txtPointschValue.Text +")";  // Insert new Discipline record 
+
 
                 conn = new SqlConnection(conStr);
-                //comm.Parameters.AddWithValue("@StudentNumber", txtStudentNum.Text);
-                //comm.Parameters.AddWithValue("@Type", cmbActionType.SelectedItem.ToString());
-                //comm.Parameters.AddWithValue("@Date", DateTime.Now);
-                //comm.Parameters.AddWithValue("@Discription", rtbDiscription.Text);
-                //comm.Parameters.AddWithValue("@Pointsch", txtPointschValue.Text);
+
                 conn.Open();
                 comm = new SqlCommand(sql, conn);
                 adap.InsertCommand = comm;
-                adap.InsertCommand.ExecuteNonQuery();
-                comm2 = new SqlCommand(sql2, conn);
-                adap.InsertCommand = comm2;
                 adap.InsertCommand.ExecuteNonQuery();
 
                 conn.Close();
@@ -66,22 +60,16 @@ namespace NWU_Pointsch_System
 
             if (sActionType == "AI")
             {
-                sql = "INSERT INTO Infraction(Infraction_Date, Infraction_Discription, Infraction_Pointsch) VALUES (@Date, @Discription, @Pointsch) WHERE (Student_NWU_ID = @StudentNumber)";  // Insert new Infraction record ///////////////////////ek dink die sal werk maar maak net seker asb emile want dis oor versilende tables
-                sql2 = "INSERT INTO Infraction(Infraction_type) VALUES (@Type) WHERE (Student_NWU_ID = @StudentNumber)";
+                sql = "INSERT INTO Infraction (Infraction_Date, Infraction_Description, Infraction_Pointsch) " +
+                   "VALUES (" + DateTime.Today.ToString("dd/MM/yyyy") + ", " + txtDescription.Text + ", " + txtPointschValue.Text + ")";  // Insert new Infraction record 
 
                 conn = new SqlConnection(conStr);
-                comm.Parameters.AddWithValue("@StudentNumber", txtStudentNum.Text);
-                comm.Parameters.AddWithValue("@Type", cmbActionType.SelectedItem.ToString());
-                comm.Parameters.AddWithValue("@Date", DateTime.Now);
-                comm.Parameters.AddWithValue("@Discription", txtDescription.Text);
-                comm.Parameters.AddWithValue("@Pointsch", txtPointschValue.Text);
+ 
                 conn.Open();
                 comm = new SqlCommand(sql, conn);
                 adap.InsertCommand = comm;
                 adap.InsertCommand.ExecuteNonQuery();
-                comm2 = new SqlCommand(sql2, conn);
-                adap.InsertCommand = comm2;
-                adap.InsertCommand.ExecuteNonQuery();
+
 
                 conn.Close();
             }

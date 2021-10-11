@@ -43,25 +43,7 @@ namespace NWU_Pointsch_System
 
         private void frmDBEdit_Load(object sender, EventArgs e)
         {
-            conn = new SqlConnection(conStr); // connecting to the databse
-            conn.Open();
-
-            adap = new SqlDataAdapter();
-            DataSet ds = new DataSet();
-
-            sql = "SELECT * FROM Student"; //display all
-
-            comm = new SqlCommand(sql, conn);
-            adap.SelectCommand = comm;
-            adap.Fill(ds, "Student");
-
-            conn.Close();
-            conn.Open();
-
-            dgvPointsch.DataSource = ds;
-            dgvPointsch.DataMember = "Student";
-
-            conn.Close();
+           
         }
 
         private void lblWorth_Click(object sender, EventArgs e)
@@ -245,6 +227,98 @@ namespace NWU_Pointsch_System
             }
 
             System.Windows.Forms.MessageBox.Show("Successfully deleted user!");
+        }
+
+        private void btnGridStudents_Click(object sender, EventArgs e)
+        {
+            conn = new SqlConnection(conStr); // connecting to the databse
+            conn.Open();
+
+            adap = new SqlDataAdapter();
+            DataSet ds = new DataSet();
+
+            sql = "SELECT * FROM Student"; //display all
+
+            comm = new SqlCommand(sql, conn);
+            adap.SelectCommand = comm;
+            adap.Fill(ds, "Student");
+
+            conn.Close();
+            conn.Open();
+
+            dgvPointsch.DataSource = ds;
+            dgvPointsch.DataMember = "Student";
+
+            conn.Close();
+        }
+
+        private void btnGridStaff_Click(object sender, EventArgs e)
+        {
+            conn = new SqlConnection(conStr); // connecting to the databse
+            conn.Open();
+
+            adap = new SqlDataAdapter();
+            DataSet ds = new DataSet();
+
+            sql = "SELECT * FROM Staff"; //display all
+
+            comm = new SqlCommand(sql, conn);
+            adap.SelectCommand = comm;
+            adap.Fill(ds, "Staff");
+
+            conn.Close();
+            conn.Open();
+
+            dgvPointsch.DataSource = ds;
+            dgvPointsch.DataMember = "Staff";
+
+            conn.Close();
+        }
+
+        private void btnGridDis_Click(object sender, EventArgs e)
+        {
+            conn = new SqlConnection(conStr); // connecting to the databse
+            conn.Open();
+
+            adap = new SqlDataAdapter();
+            DataSet ds = new DataSet();
+
+            sql = "SELECT * FROM Discipline_type"; //display all
+
+            comm = new SqlCommand(sql, conn);
+            adap.SelectCommand = comm;
+            adap.Fill(ds, "Discipline_type");
+
+            conn.Close();
+            conn.Open();
+
+            dgvPointsch.DataSource = ds;
+            dgvPointsch.DataMember = "Discipline_type";
+
+            conn.Close();
+        }
+
+        private void btnGridInf_Click(object sender, EventArgs e)
+        {
+            conn = new SqlConnection(conStr); // connecting to the databse
+            conn.Open();
+
+            adap = new SqlDataAdapter();
+            DataSet ds = new DataSet();
+
+            sql = "SELECT * FROM Infraction_type"; //display all
+
+            comm = new SqlCommand(sql, conn);
+            adap.SelectCommand = comm;
+            adap.Fill(ds, "Infraction_type");
+
+            conn.Close();
+            conn.Open();
+
+            dgvPointsch.DataSource = ds;
+            dgvPointsch.DataMember = "Infraction_type";
+
+            conn.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
