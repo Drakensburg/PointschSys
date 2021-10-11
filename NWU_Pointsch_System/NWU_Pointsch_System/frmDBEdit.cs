@@ -43,7 +43,25 @@ namespace NWU_Pointsch_System
 
         private void frmDBEdit_Load(object sender, EventArgs e)
         {
+            conn = new SqlConnection(conStr); // connecting to the databse
+            conn.Open();
 
+            adap = new SqlDataAdapter();
+            DataSet ds = new DataSet();
+
+            sql = "SELECT * FROM Student"; //display all
+
+            comm = new SqlCommand(sql, conn);
+            adap.SelectCommand = comm;
+            adap.Fill(ds, "Student");
+
+            conn.Close();
+            conn.Open();
+
+            dgvPointsch.DataSource = ds;
+            dgvPointsch.DataMember = "Student";
+
+            conn.Close();
         }
 
         private void lblWorth_Click(object sender, EventArgs e)
@@ -53,10 +71,10 @@ namespace NWU_Pointsch_System
 
         private void btnPIAdd_Click(object sender, EventArgs e)
         {
-            string cbDI = cbPosition.SelectedItem.ToString();
+            string sDI = cbDI.SelectedItem.ToString();
 
 
-            if (cbDI.Equals("D"))//adding new Discipline type
+            if (sDI.Equals("DISCIPLINE"))//adding new Discipline type
             {
   
                 sql = "INSERT INTO Discipline_Type(Discipline_Type, Discipline_Pointsch_Min, Discipline_Pointsch_Min) VALUES (@type, @min, @max)";
@@ -75,10 +93,10 @@ namespace NWU_Pointsch_System
                 conn.Close();
 
             }
-            else if (cbDI.Equals("I"))//adding new Infraction type
+            else if (sDI.Equals("INFRACTION"))//adding new Infraction type
             {
           
-                sql = "INSERT INTO Infraction_Type(Infraction_Type, Infraction_Pointsch_Min, Infraction_Pointsch_Min) VALUES (@type, @min, @max)";
+                sql = "INSERT INTO Infraction_Type(Infraction_Type, Infraction_Pointsch_Min, Infraction_Pointsch_Max) VALUES (@type, @min, @max)";
 
                 conn = new SqlConnection(conStr);
                 conn.Open();
@@ -226,7 +244,7 @@ namespace NWU_Pointsch_System
                 System.Windows.Forms.MessageBox.Show(ex.ToString());
             }
 
-            System.Windows.Forms.MessageBox.Show("Successfully added user!");
+            System.Windows.Forms.MessageBox.Show("Successfully deleted user!");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -262,8 +280,8 @@ namespace NWU_Pointsch_System
                     }
                     else if (cbResult.Equals("Staff"))//add new staff
                     {
-                        sql =                             "       INSERT INTO Staff(Staff_NWU_ID, Staff_ID, Staff_Name, Staff_Surname, Staff_Admin Campus_Name)" +
-                                                          "       VALUES(@Staff_NWU_ID, @Staff_ID, @Staff_Name, @Staff_Surname, @Staff_Admin @Campus_Name)";
+                        sql =                             "       INSERT INTO Staff(Staff_NWU_ID, Staff_ID, Staff_Name, Staff_Surname, Staff_Admin, Campus_Name)" +
+                                                          "       VALUES(@Staff_NWU_ID, @Staff_ID, @Staff_Name, @Staff_Surname, @Staff_Admin, @Campus_Name)";
                         conn = new SqlConnection(conStr);
                         conn.Open();
                         comm = new SqlCommand(sql, conn);
@@ -283,8 +301,8 @@ namespace NWU_Pointsch_System
                     }
                     else if (cbResult.Equals("Admin"))//add new admin
                     {
-                        sql =                             "       INSERT INTO Staff(Staff_NWU_ID, Staff_ID, Staff_Name, Staff_Surname, Staff_Admin Campus_Name)" +
-                                                          "       VALUES(@Staff_NWU_ID, @Staff_ID, @Staff_Name, @Staff_Surname, @Staff_Admin @Campus_Name)";
+                        sql =                             "       INSERT INTO Staff(Staff_NWU_ID, Staff_ID, Staff_Name, Staff_Surname, Staff_Admin, Campus_Name)" +
+                                                          "       VALUES(@Staff_NWU_ID, @Staff_ID, @Staff_Name, @Staff_Surname, @Staff_Admin, @Campus_Name)";
                         conn = new SqlConnection(conStr);
                         conn.Open();
                         comm = new SqlCommand(sql, conn);
