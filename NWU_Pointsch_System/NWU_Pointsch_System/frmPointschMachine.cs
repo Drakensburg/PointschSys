@@ -20,6 +20,7 @@ namespace NWU_Pointsch_System
         SqlDataAdapter adap;
         SqlDataReader reader;
         string sql, sql2 = "";
+        private string typeCode;
 
         public frmPointschMachine()
         {
@@ -43,27 +44,31 @@ namespace NWU_Pointsch_System
         {
             //MessageBox.Show(currentDateTime.ToString());
             if (sActionType == "AD")
-            {
-                sql = "INSERT INTO Discipline (Discipline_Student_ID, Student_NWU_ID, Staff_NWU_ID, Discipline_Date, Discipline_Description, Discipline_Pointsch) " +
-                    "VALUES ('" + txtDIstudentID.Text + "', " + txtStudentNum.Text + ", " + txtStaffID.Text + ", " + DateTime.Today.ToString("dd /MM/yyyy") +
-                    ", '"+ txtDescription.Text +"', "+ txtPointschValue.Text +")";  // Insert new Discipline record 
+            {                
+                //MessageBox.Show(typeCode);
+
+                sql = "INSERT INTO Discipline (Discipline_Student_ID, Student_NWU_ID, Staff_NWU_ID, Discipline_Date, Discipline_Description, Discipline_Type_Code, Discipline_Pointsch) " +
+                    "VALUES ('" + txtDIstudentID.Text + "', '" + txtStudentNum.Text + "', '" + txtStaffID.Text + "', '" + DateTime.Today.ToString("dd/MMM/yyyy") +
+                    "', '"+ txtDescription.Text +"', '"+ typeCode +"', '" +txtPointschValue.Text +"')";  // Insert new Discipline record 
+
 
 
                 conn = new SqlConnection(conStr);
-
                 conn.Open();
                 comm = new SqlCommand(sql, conn);
                 adap.InsertCommand = comm;
                 adap.InsertCommand.ExecuteNonQuery();
+
+                MessageBox.Show("Discipline added successfully.");
 
                 conn.Close();
             }
 
             if (sActionType == "AI")
             {
-                sql = "INSERT INTO Infraction (Infraction_Student_ID, Student_NWU_ID, Staff_NWU_ID, Infraction_Date, Infraction_Description, Infraction_Pointsch) " +
-                   "VALUES ('" + txtDIstudentID.Text + "', " + txtStudentNum.Text + ", " + txtStaffID.Text + ", " + DateTime.Today.ToString("dd /MM/yyyy") +
-                    ", '" + txtDescription.Text + "', " + txtPointschValue.Text + ")";  // Insert new Discipline record 
+                sql = "INSERT INTO Infraction (Infraction_Student_ID, Student_NWU_ID, Staff_NWU_ID, Infraction_Date, Infraction_Description, Infraction_Type_Code, Infraction_Pointsch) " +
+                   "VALUES ('" + txtDIstudentID.Text + "', '" + txtStudentNum.Text + "', '" + txtStaffID.Text + "', '" + DateTime.Today.ToString("dd/MMM/yyyy") +
+                    "', '" + txtDescription.Text + "', '" + typeCode + "', '" + txtPointschValue.Text + "')";  // Insert new Discipline record 
 
 
                 conn = new SqlConnection(conStr);
@@ -73,6 +78,7 @@ namespace NWU_Pointsch_System
                 adap.InsertCommand = comm;
                 adap.InsertCommand.ExecuteNonQuery();
 
+                MessageBox.Show("Infraction added successfully.");
 
                 conn.Close();
             }
@@ -131,8 +137,38 @@ namespace NWU_Pointsch_System
 
         private void cmbActionType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-      
+            if(sActionType == "AD")
+            {
+                sql = "SELECT Discipline_Type_Code FROM Discipline_Type WHERE Discipline_Type = '" + cmbActionType.SelectedItem.ToString() + "'";
+
+                conn = new SqlConnection(conStr);
+                conn.Open();
+                comm = new SqlCommand(sql, conn);
+                reader = comm.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    typeCode = reader.GetValue(0).ToString();
+                }
+
+                conn.Close();
+            }
+            else if(sActionType == "AI")
+            {
+                sql = "SELECT Infraction_Type_Code FROM Infraction_Type WHERE Infraction_Type = '" + cmbActionType.SelectedItem.ToString() + "'";
+
+                conn = new SqlConnection(conStr);
+                conn.Open();
+                comm = new SqlCommand(sql, conn);
+                reader = comm.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    typeCode = reader.GetValue(0).ToString();
+                }
+
+                conn.Close();
+            }
             
         }
     }

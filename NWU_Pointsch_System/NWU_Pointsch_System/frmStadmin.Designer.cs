@@ -57,6 +57,7 @@ namespace NWU_Pointsch_System
             this.btnAddDiscipline = new System.Windows.Forms.Button();
             this.btnEditDB = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picbPurpleThing)).BeginInit();
             this.gbInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picbLogo)).BeginInit();
@@ -382,12 +383,23 @@ namespace NWU_Pointsch_System
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(280, 544);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(105, 26);
+            this.btnRefresh.TabIndex = 17;
+            this.btnRefresh.Text = "REFRESH";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // frmStadmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(542, 578);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnEditDB);
             this.Controls.Add(this.groupBox1);
@@ -445,5 +457,6 @@ namespace NWU_Pointsch_System
         public System.Windows.Forms.Label lblSurname;
         public System.Windows.Forms.Label lblSnoPhys;
         public System.Windows.Forms.Button btnEditDB;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
