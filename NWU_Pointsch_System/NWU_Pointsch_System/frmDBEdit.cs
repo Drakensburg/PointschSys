@@ -58,7 +58,9 @@ namespace NWU_Pointsch_System
 
             if (sDI.Equals("DISCIPLINE"))//adding new Discipline type
             {
-  
+
+
+
                 sql = "INSERT INTO Discipline_Type(Discipline_Type, Discipline_Pointsch_Min, Discipline_Pointsch_Min) VALUES (@type, @min, @max)";
 
                 conn = new SqlConnection(conStr);
