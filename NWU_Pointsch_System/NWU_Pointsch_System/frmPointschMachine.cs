@@ -44,8 +44,9 @@ namespace NWU_Pointsch_System
             //MessageBox.Show(currentDateTime.ToString());
             if (sActionType == "AD")
             {
-                sql = "INSERT INTO Discipline (Discipline_Date, Discipline_Description, Discipline_Pointsch) " +
-                    "VALUES (" + DateTime.Today.ToString("dd/MM/yyyy") +", "+ txtDescription.Text +", "+ txtPointschValue.Text +")";  // Insert new Discipline record 
+                sql = "INSERT INTO Discipline (Discipline_Student_ID, Student_NWU_ID, Staff_NWU_ID, Discipline_Date, Discipline_Description, Discipline_Pointsch) " +
+                    "VALUES ('" + txtDIstudentID.Text + "', " + txtStudentNum.Text + ", " + txtStaffID.Text + ", " + DateTime.Today.ToString("dd /MM/yyyy") +
+                    ", '"+ txtDescription.Text +"', "+ txtPointschValue.Text +")";  // Insert new Discipline record 
 
 
                 conn = new SqlConnection(conStr);
@@ -60,8 +61,10 @@ namespace NWU_Pointsch_System
 
             if (sActionType == "AI")
             {
-                sql = "INSERT INTO Infraction (Infraction_Date, Infraction_Description, Infraction_Pointsch) " +
-                   "VALUES (" + DateTime.Today.ToString("dd/MM/yyyy") + ", " + txtDescription.Text + ", " + txtPointschValue.Text + ")";  // Insert new Infraction record 
+                sql = "INSERT INTO Infraction (Infraction_Student_ID, Student_NWU_ID, Staff_NWU_ID, Infraction_Date, Infraction_Description, Infraction_Pointsch) " +
+                   "VALUES ('" + txtDIstudentID.Text + "', " + txtStudentNum.Text + ", " + txtStaffID.Text + ", " + DateTime.Today.ToString("dd /MM/yyyy") +
+                    ", '" + txtDescription.Text + "', " + txtPointschValue.Text + ")";  // Insert new Discipline record 
+
 
                 conn = new SqlConnection(conStr);
  
@@ -77,22 +80,7 @@ namespace NWU_Pointsch_System
 
         private void btnGetStudent_Click(object sender, EventArgs e)
         {
-            sql = "SELECT Student_Name, Student_Surname FROM Student WHERE (Student_NWU_ID = @StudentNumber)"; // Find student name surname acording to student num filled in
-
-            conn = new SqlConnection(conStr);
-            comm = new SqlCommand(sql, conn);
-            conn.Open();
-            comm.Parameters.AddWithValue("@StudentNumber", txtStudentNum.Text);
-            adap = new SqlDataAdapter(comm);
-            reader = comm.ExecuteReader();
-
-            while (reader.Read())
-            {
-                string sNameSurname = reader.GetValue(0) +" "+ reader.GetValue(1);
-                lblStudentDetail.Text = sNameSurname + " WILL BE AFFECTED BY THIS REQUEST";
-            }
-
-            conn.Close();
+            
         }
 
         private void label5_Click(object sender, EventArgs e)
